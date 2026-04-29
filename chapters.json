@@ -2,20 +2,20 @@
   {
     "id": "intro",
     "eyebrow": "INOVUES \u00b7 MANHATTAN PORTFOLIO",
-    "title": "6 Active Deals",
-    "subtitle": "From a single-window mockup on Madison Avenue to a 211,000 ft\u00b2 trophy on Park \u2014 every active opportunity in Manhattan.",
+    "title": "4 Active Deals",
+    "subtitle": "From a 2,500 ft\u00b2 medical-campus deal to a 211,000 ft\u00b2 trophy on Park Avenue \u2014 every active opportunity in Manhattan.",
     "stats": [
       [
         "DEALS",
-        "6"
+        "4"
       ],
       [
         "GLASS",
-        "315K ft\u00b2"
+        "275K ft\u00b2"
       ],
       [
         "PIPELINE",
-        "$11.3M"
+        "$11.1M"
       ]
     ],
     "camera": {
@@ -92,70 +92,8 @@
     }
   },
   {
-    "id": "437 Madison Avenue (Mockup)",
-    "eyebrow": "CHAPTER 03 \u00b7 MIDTOWN",
-    "title": "437 Madison Avenue",
-    "subtitle": "Early-stage lead. 53 ft\u00b2 scope under qualification.",
-    "stats": [
-      [
-        "GLASS",
-        "53 ft\u00b2"
-      ],
-      [
-        "VALUE",
-        "$9K"
-      ],
-      [
-        "STAGE",
-        "4 / 8"
-      ]
-    ],
-    "tier": "small",
-    "camera": {
-      "center": [
-        -73.975372,
-        40.757478
-      ],
-      "zoom": 15.5,
-      "pitch": 45,
-      "bearing": 9,
-      "duration": 5000
-    }
-  },
-  {
-    "id": "437 Madison Avenue, NYC",
-    "eyebrow": "CHAPTER 04 \u00b7 MIDTOWN",
-    "title": "437 Madison Avenue",
-    "subtitle": "Mid-size opportunity. 40,000 ft\u00b2 scope. Typical INOVUES deployment.",
-    "stats": [
-      [
-        "GLASS",
-        "40,000 ft\u00b2"
-      ],
-      [
-        "VALUE",
-        "$250K"
-      ],
-      [
-        "STAGE",
-        "1 / 8"
-      ]
-    ],
-    "tier": "mid",
-    "camera": {
-      "center": [
-        -73.975372,
-        40.757478
-      ],
-      "zoom": 15.5,
-      "pitch": 45,
-      "bearing": 32,
-      "duration": 5000
-    }
-  },
-  {
     "id": "277 Park Ave NYC",
-    "eyebrow": "CHAPTER 05 \u00b7 MIDTOWN EAST",
+    "eyebrow": "CHAPTER 03 \u00b7 MIDTOWN EAST",
     "title": "277 Park Ave NYC",
     "subtitle": "Flagship trophy asset. 211,050 ft\u00b2 of glass \u2014 among the largest opportunities in the NYC pipeline.",
     "stats": [
@@ -186,7 +124,7 @@
   },
   {
     "id": "445 Fifth Avenue",
-    "eyebrow": "CHAPTER 06 \u00b7 MIDTOWN",
+    "eyebrow": "CHAPTER 04 \u00b7 MIDTOWN",
     "title": "445 Fifth Avenue",
     "subtitle": "Mid-size opportunity. 11,872 ft\u00b2 scope. Typical INOVUES deployment.",
     "stats": [
@@ -218,20 +156,20 @@
   {
     "id": "outro",
     "eyebrow": "MANHATTAN PIPELINE",
-    "title": "$11.3M in motion",
-    "subtitle": "6 deals, 315K square feet of Manhattan glass. Every project on the path to compliance and ESG capture.",
+    "title": "$11.1M in motion",
+    "subtitle": "4 deals, 275K square feet of Manhattan glass. Every project on the path to compliance and ESG capture.",
     "stats": [
       [
         "DEALS",
-        "6"
+        "4"
       ],
       [
         "GLASS",
-        "315K ft\u00b2"
+        "275K ft\u00b2"
       ],
       [
         "PIPELINE",
-        "$11.3M"
+        "$11.1M"
       ]
     ],
     "camera": {
