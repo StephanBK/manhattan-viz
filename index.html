@@ -1028,17 +1028,36 @@ map.on('load', async () => {
 
   // Inline deal data (embedded so file:// protocol works without a server)
   // For production updates, edit deals.geojson and re-run the inline injection
-  const INLINE_DEALS = {"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.975162, 40.74902]}, "properties": {"name": "605 Third Avenue Mockup", "full_name": "605 Third Avenue Mockup", "area": "Midtown", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 100, "amount": 5000.0, "tier": "small", "is_mockup": true, "created": "3/5/26 17:42", "close": "8/14/26 17:41", "address": "605 Third Avenue, New York, New York 10158, United States"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.979784, 40.754493]}, "properties": {"name": "445 Fifth Avenue", "full_name": "445 Fifth Avenue", "area": "Midtown", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 11872, "amount": 481425.32, "tier": "mid", "is_mockup": false, "created": "2/5/26 15:06", "close": "12/31/27 11:19", "address": "445 Fifth Avenue, New York, New York 10173, United States"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.95448, 40.764353]}, "properties": {"name": "NY Presbyterian-Luxwall", "full_name": "NY Presbyterian-Luxwall", "area": "UES", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 2500, "amount": 140000.0, "tier": "mid", "is_mockup": false, "created": "12/2/25 11:49", "close": "9/30/26 11:21", "address": "525 East 68th Street, New York, New York 10065, United States"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.975372, 40.757478]}, "properties": {"name": "437 Madison Avenue", "full_name": "437 Madison Avenue (Mockup)", "area": "Midtown", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 53, "amount": 8568.53, "tier": "small", "is_mockup": true, "created": "9/3/25 23:03", "close": "9/30/26 11:23", "address": "437 Madison Avenue, New York, New York 10022, United States"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.975372, 40.757478]}, "properties": {"name": "437 Madison Avenue", "full_name": "437 Madison Avenue, NYC", "area": "Midtown", "stage": "Potential Building/Lead", "stage_idx": 1, "stage_total": 8, "sf": 40000, "amount": 250000.0, "tier": "mid", "is_mockup": false, "created": "8/27/25 15:08", "close": "2/20/25 15:07", "address": "437 Madison Avenue, New York, New York 10022, United States"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.9742, 40.7568]}, "properties": {"name": "277 Park Ave NYC", "full_name": "277 Park Ave NYC", "area": "Midtown East", "stage": "Filled Initial Survey Form", "stage_idx": 3, "stage_total": 8, "sf": 211050, "amount": 8442000.0, "tier": "flagship", "is_mockup": false, "created": "8/22/25 16:41", "close": "3/31/27 12:17", "address": "277 Park Avenue, Manhattan, NY 10172 (corrected)"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.982374, 40.763462]}, "properties": {"name": "1700 Broadway", "full_name": "1700 Broadway, NYC", "area": "Midtown West", "stage": "Potential Building/Lead", "stage_idx": 1, "stage_total": 8, "sf": 50000, "amount": 2000000.0, "tier": "major", "is_mockup": false, "created": "8/18/25 8:34", "close": "8/21/26 15:05", "address": "1700 Broadway, New York, New York 10019, United States"}}]};
+  const INLINE_DEALS_POLYGONS = {"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": {"type": "MultiPolygon", "coordinates": [[[[-73.97517145271, 40.749300711097], [-73.974673111205, 40.749090720709], [-73.974647235905, 40.74907981709], [-73.974984717646, 40.748616604677], [-73.974997704956, 40.748622077173], [-73.975041661748, 40.748640600215], [-73.975508930741, 40.748837497163], [-73.975426127236, 40.748951152243], [-73.975501519368, 40.748982920154], [-73.975402629956, 40.749118654008], [-73.975331386161, 40.749216440961], [-73.975255993847, 40.749184672039], [-73.97517145271, 40.749300711097]]]]}, "properties": {"name": "605 Third Avenue Mockup", "full_name": "605 Third Avenue Mockup", "area": "Midtown", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 100, "amount": 5000.0, "tier": "small", "is_mockup": true, "created": "3/5/26 17:42", "close": "8/14/26 17:41", "address": "605 Third Avenue, New York, New York 10158, United States", "point_lng": -73.975162, "point_lat": 40.74902, "building_height_ft": 520.66, "building_year": 1963, "bin": "1082153"}}, {"type": "Feature", "geometry": {"type": "MultiPolygon", "coordinates": [[[[-73.979362265795, 40.754450071797], [-73.979437992024, 40.754346429038], [-73.979520178071, 40.754233945312], [-73.979784282752, 40.754345533987], [-73.979991358131, 40.754433025439], [-73.979969991398, 40.754462269248], [-73.979833446912, 40.754649152563], [-73.97963866607, 40.754566855318], [-73.97963856898, 40.754566813878], [-73.979362265795, 40.754450071797]]]]}, "properties": {"name": "445 Fifth Avenue", "full_name": "445 Fifth Avenue", "area": "Midtown", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 11872, "amount": 481425.32, "tier": "mid", "is_mockup": false, "created": "2/5/26 15:06", "close": "12/31/27 11:19", "address": "445 Fifth Avenue, New York, New York 10173, United States", "point_lng": -73.979784, "point_lat": 40.754493, "building_height_ft": 261.30054092, "building_year": 1958, "bin": "1035365"}}, {"type": "Feature", "geometry": {"type": "MultiPolygon", "coordinates": [[[[-73.954817576942, 40.765092265403], [-73.954637061071, 40.765016860084], [-73.954272722375, 40.76486466681], [-73.954243005597, 40.764852253267], [-73.954257105886, 40.764832740435], [-73.954329524152, 40.764732520519], [-73.954531896114, 40.764817057059], [-73.95456525738, 40.764830992917], [-73.954643859852, 40.764722214147], [-73.954741161827, 40.76458755497], [-73.954705124743, 40.764572501486], [-73.954655329788, 40.764641414607], [-73.954627342901, 40.764680146887], [-73.954427645949, 40.764596728197], [-73.954537937505, 40.764444094856], [-73.954600036061, 40.764470034957], [-73.954651847442, 40.764398331989], [-73.954676266767, 40.764408532606], [-73.954813507207, 40.764465861291], [-73.954843466645, 40.76447837654], [-73.954823382321, 40.764506171739], [-73.955039069833, 40.764596268723], [-73.955058389465, 40.764569532182], [-73.955167177083, 40.764614975292], [-73.954821201283, 40.765093779671], [-73.954817576942, 40.765092265403]]]]}, "properties": {"name": "NY Presbyterian-Luxwall", "full_name": "NY Presbyterian-Luxwall", "area": "UES", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 2500, "amount": 140000.0, "tier": "mid", "is_mockup": false, "created": "12/2/25 11:49", "close": "9/30/26 11:21", "address": "525 East 68th Street, New York, New York 10065, United States", "point_lng": -73.95448, "point_lat": 40.764353, "building_height_ft": 264.29, "building_year": 1956, "bin": "1084785"}}, {"type": "Feature", "geometry": {"type": "MultiPolygon", "coordinates": [[[[-73.975215508906, 40.757090535806], [-73.975232479361, 40.757067103806], [-73.975352303764, 40.757117285846], [-73.975645392939, 40.757240028508], [-73.975787351496, 40.757299479168], [-73.97576295229, 40.757333167341], [-73.975646253293, 40.757494295344], [-73.975524588058, 40.757662279517], [-73.975209239389, 40.75753021424], [-73.975124399562, 40.75749468453], [-73.974969712633, 40.757429902001], [-73.975009164614, 40.757375431801], [-73.975101630128, 40.757247766483], [-73.975215508906, 40.757090535806]]]]}, "properties": {"name": "437 Madison Avenue", "full_name": "437 Madison Avenue (Mockup)", "area": "Midtown", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 53, "amount": 8568.53, "tier": "small", "is_mockup": true, "created": "9/3/25 23:03", "close": "9/30/26 11:23", "address": "437 Madison Avenue, New York, New York 10022, United States", "point_lng": -73.975372, "point_lat": 40.757478, "building_height_ft": 506.12, "building_year": 1967, "bin": "1035455"}}, {"type": "Feature", "geometry": {"type": "MultiPolygon", "coordinates": [[[[-73.975215508906, 40.757090535806], [-73.975232479361, 40.757067103806], [-73.975352303764, 40.757117285846], [-73.975645392939, 40.757240028508], [-73.975787351496, 40.757299479168], [-73.97576295229, 40.757333167341], [-73.975646253293, 40.757494295344], [-73.975524588058, 40.757662279517], [-73.975209239389, 40.75753021424], [-73.975124399562, 40.75749468453], [-73.974969712633, 40.757429902001], [-73.975009164614, 40.757375431801], [-73.975101630128, 40.757247766483], [-73.975215508906, 40.757090535806]]]]}, "properties": {"name": "437 Madison Avenue", "full_name": "437 Madison Avenue, NYC", "area": "Midtown", "stage": "Potential Building/Lead", "stage_idx": 1, "stage_total": 8, "sf": 40000, "amount": 250000.0, "tier": "mid", "is_mockup": false, "created": "8/27/25 15:08", "close": "2/20/25 15:07", "address": "437 Madison Avenue, New York, New York 10022, United States", "point_lng": -73.975372, "point_lat": 40.757478, "building_height_ft": 506.12, "building_year": 1967, "bin": "1035455"}}, {"type": "Feature", "geometry": {"type": "MultiPolygon", "coordinates": [[[[-73.973811492095, 40.756131105092], [-73.974082032321, 40.755755213368], [-73.974199280749, 40.75580401016], [-73.97439393346, 40.755885019832], [-73.974542831263, 40.755946987791], [-73.974272292859, 40.756322880587], [-73.974172595459, 40.756281388207], [-73.973951838895, 40.756189514873], [-73.973811492095, 40.756131105092]]]]}, "properties": {"name": "277 Park Ave NYC", "full_name": "277 Park Ave NYC", "area": "Midtown East", "stage": "Filled Initial Survey Form", "stage_idx": 3, "stage_total": 8, "sf": 211050, "amount": 8442000.0, "tier": "flagship", "is_mockup": false, "created": "8/22/25 16:41", "close": "3/31/27 12:17", "address": "277 Park Avenue, Manhattan, NY 10172 (corrected)", "point_lng": -73.9742, "point_lat": 40.7568, "building_height_ft": 572.78957763, "building_year": 1966, "bin": "1036223"}}, {"type": "Feature", "geometry": {"type": "MultiPolygon", "coordinates": [[[[-73.982068642438, 40.763300271973], [-73.982126715704, 40.763219845239], [-73.982223652622, 40.763260310893], [-73.982609524489, 40.763421387171], [-73.982610566598, 40.763421822272], [-73.98239367058, 40.763722207503], [-73.982324845266, 40.763817525258], [-73.982316579012, 40.763828973002], [-73.982315614596, 40.763830309202], [-73.98231204891, 40.763828820121], [-73.982256139548, 40.763805482159], [-73.981994285498, 40.763696174338], [-73.98208523234, 40.76357022146], [-73.982231165748, 40.763368115939], [-73.982068642438, 40.763300271973]]]]}, "properties": {"name": "1700 Broadway", "full_name": "1700 Broadway, NYC", "area": "Midtown West", "stage": "Potential Building/Lead", "stage_idx": 1, "stage_total": 8, "sf": 50000, "amount": 2000000.0, "tier": "major", "is_mockup": false, "created": "8/18/25 8:34", "close": "8/21/26 15:05", "address": "1700 Broadway, New York, New York 10019, United States", "point_lng": -73.982374, "point_lat": 40.763462, "building_height_ft": 505.43, "building_year": 1968, "bin": "1024836"}}]};
+  const INLINE_DEALS_POINTS = {"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.975162, 40.74902]}, "properties": {"name": "605 Third Avenue Mockup", "full_name": "605 Third Avenue Mockup", "area": "Midtown", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 100, "amount": 5000.0, "tier": "small", "is_mockup": true, "created": "3/5/26 17:42", "close": "8/14/26 17:41", "address": "605 Third Avenue, New York, New York 10158, United States", "point_lng": -73.975162, "point_lat": 40.74902, "building_height_ft": 520.66, "building_year": 1963, "bin": "1082153"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.979784, 40.754493]}, "properties": {"name": "445 Fifth Avenue", "full_name": "445 Fifth Avenue", "area": "Midtown", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 11872, "amount": 481425.32, "tier": "mid", "is_mockup": false, "created": "2/5/26 15:06", "close": "12/31/27 11:19", "address": "445 Fifth Avenue, New York, New York 10173, United States", "point_lng": -73.979784, "point_lat": 40.754493, "building_height_ft": 261.30054092, "building_year": 1958, "bin": "1035365"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.95448, 40.764353]}, "properties": {"name": "NY Presbyterian-Luxwall", "full_name": "NY Presbyterian-Luxwall", "area": "UES", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 2500, "amount": 140000.0, "tier": "mid", "is_mockup": false, "created": "12/2/25 11:49", "close": "9/30/26 11:21", "address": "525 East 68th Street, New York, New York 10065, United States", "point_lng": -73.95448, "point_lat": 40.764353, "building_height_ft": 264.29, "building_year": 1956, "bin": "1084785"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.975372, 40.757478]}, "properties": {"name": "437 Madison Avenue", "full_name": "437 Madison Avenue (Mockup)", "area": "Midtown", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 53, "amount": 8568.53, "tier": "small", "is_mockup": true, "created": "9/3/25 23:03", "close": "9/30/26 11:23", "address": "437 Madison Avenue, New York, New York 10022, United States", "point_lng": -73.975372, "point_lat": 40.757478, "building_height_ft": 506.12, "building_year": 1967, "bin": "1035455"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.975372, 40.757478]}, "properties": {"name": "437 Madison Avenue", "full_name": "437 Madison Avenue, NYC", "area": "Midtown", "stage": "Potential Building/Lead", "stage_idx": 1, "stage_total": 8, "sf": 40000, "amount": 250000.0, "tier": "mid", "is_mockup": false, "created": "8/27/25 15:08", "close": "2/20/25 15:07", "address": "437 Madison Avenue, New York, New York 10022, United States", "point_lng": -73.975372, "point_lat": 40.757478, "building_height_ft": 506.12, "building_year": 1967, "bin": "1035455"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.9742, 40.7568]}, "properties": {"name": "277 Park Ave NYC", "full_name": "277 Park Ave NYC", "area": "Midtown East", "stage": "Filled Initial Survey Form", "stage_idx": 3, "stage_total": 8, "sf": 211050, "amount": 8442000.0, "tier": "flagship", "is_mockup": false, "created": "8/22/25 16:41", "close": "3/31/27 12:17", "address": "277 Park Avenue, Manhattan, NY 10172 (corrected)", "point_lng": -73.9742, "point_lat": 40.7568, "building_height_ft": 572.78957763, "building_year": 1966, "bin": "1036223"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.982374, 40.763462]}, "properties": {"name": "1700 Broadway", "full_name": "1700 Broadway, NYC", "area": "Midtown West", "stage": "Potential Building/Lead", "stage_idx": 1, "stage_total": 8, "sf": 50000, "amount": 2000000.0, "tier": "major", "is_mockup": false, "created": "8/18/25 8:34", "close": "8/21/26 15:05", "address": "1700 Broadway, New York, New York 10019, United States", "point_lng": -73.982374, "point_lat": 40.763462, "building_height_ft": 505.43, "building_year": 1968, "bin": "1024836"}}]};
+  const INLINE_DEALS = INLINE_DEALS_POINTS; // backward compat
 
-  // Try fetch first (in case deals.geojson is updated separately), fall back to inline
+  // Try fetch first, fall back to inline. Normalize to points (centroids)
+  // because the rest of the code expects point geometries.
   let deals;
   try {
     const res = await fetch('deals.geojson');
     if (!res.ok) throw new Error('fetch failed');
-    deals = await res.json();
+    const fetched = await res.json();
+    // Convert any polygon features to points using point_lng/lat property
+    deals = {
+      type: 'FeatureCollection',
+      features: fetched.features.map(f => {
+        if (f.geometry.type === 'Point') return f;
+        const p = f.properties;
+        if (p.point_lng !== undefined && p.point_lat !== undefined) {
+          return {
+            type: 'Feature',
+            geometry: { type: 'Point', coordinates: [p.point_lng, p.point_lat] },
+            properties: p
+          };
+        }
+        return null;
+      }).filter(Boolean)
+    };
   } catch (e) {
     console.log('Using inline deals data (fetch unavailable, e.g. file:// protocol)');
-    deals = INLINE_DEALS;
+    deals = INLINE_DEALS_POINTS;
   }
 
   // ============================================================
@@ -1046,8 +1065,8 @@ map.on('load', async () => {
   //  Uses Mapbox's built-in vector building footprints.
   //  We use TWO building layers:
   //    1. 'city-buildings' — all buildings, dark gray (background)
-  //    2. 'highlighted-buildings' — filtered to our deal locations,
-  //       colored by tier (set after queryRenderedFeatures finds them)
+  //    2. 'deal-buildings-extruded' — our 7 real building polygons baked
+  //       in from NYC Open Data, colored by tier, height in real meters.
   // ============================================================
   const layers = map.getStyle().layers;
   const labelLayerId = layers.find(l => l.type === 'symbol' && l.layout && l.layout['text-field'])?.id;
@@ -1072,103 +1091,39 @@ map.on('load', async () => {
   map.addSource('deals', { type: 'geojson', data: deals });
 
   // ============================================================
-  //  IDENTIFY DEAL BUILDINGS — find the actual building footprint
-  //  under each deal coordinate, then highlight those specific ones
+  //  DEAL BUILDINGS — render real NYC building footprints
+  //  We baked these in from NYC Open Data so they work at every zoom,
+  //  no flicker, no tile dependency. Each deal has its actual polygon
+  //  with real building height (in feet, converted to meters).
   // ============================================================
-  // Building highlight — runs on every map idle event because Mapbox vector
-  // tile feature IDs change when new tiles load (zoom/pan). We have to re-apply
-  // setFeatureState every time tiles refresh, otherwise highlights flicker out.
-  const dealBuildingMap = {}; // building feature ID -> deal properties
+  map.addSource('deal-buildings', {
+    type: 'geojson',
+    data: INLINE_DEALS_POLYGONS
+  });
 
-  function highlightDealBuildings() {
-    let found = 0;
-    deals.features.forEach(deal => {
-      const [lng, lat] = deal.geometry.coordinates;
-      const pt = map.project([lng, lat]);
-      // Query a slightly larger box to be more forgiving with geocode imprecision
-      const features = map.queryRenderedFeatures(
-        [[pt.x - 6, pt.y - 6], [pt.x + 6, pt.y + 6]],
-        { layers: ['city-buildings'] }
-      );
-      if (features.length > 0) {
-        // Pick tallest in box (skyscraper heuristic)
-        const best = features.reduce((a, b) =>
-          (b.properties.height || 0) > (a.properties.height || 0) ? b : a
-        );
-        const id = best.id;
-        if (id !== undefined) {
-          dealBuildingMap[id] = deal.properties;
-          map.setFeatureState(
-            { source: 'composite', sourceLayer: 'building', id: id },
-            { tier: deal.properties.tier, isDeal: true }
-          );
-          found++;
-        }
-      }
-    });
-    return found;
-  }
-
-  // Add the highlight layer — paints buildings whose feature-state has tier set
   map.addLayer({
-    id: 'highlighted-buildings',
+    id: 'deal-buildings-extruded',
     type: 'fill-extrusion',
-    source: 'composite',
-    'source-layer': 'building',
-    filter: ['==', 'extrude', 'true'],
-    minzoom: 11,
+    source: 'deal-buildings',
     paint: {
       'fill-extrusion-color': [
-        'case',
-        ['==', ['feature-state', 'tier'], 'flagship'], TIER_COLORS.flagship,
-        ['==', ['feature-state', 'tier'], 'major'],    TIER_COLORS.major,
-        ['==', ['feature-state', 'tier'], 'mid'],      TIER_COLORS.mid,
-        ['==', ['feature-state', 'tier'], 'small'],    TIER_COLORS.small,
-        'transparent'
+        'match', ['get', 'tier'],
+        'flagship', TIER_COLORS.flagship,
+        'major',    TIER_COLORS.major,
+        'mid',      TIER_COLORS.mid,
+        TIER_COLORS.small,
       ],
-      'fill-extrusion-height': ['get', 'height'],
-      'fill-extrusion-base': ['get', 'min_height'],
-      'fill-extrusion-opacity': [
-        'case',
-        ['==', ['feature-state', 'isDeal'], true], 0.95,
-        0
+      // Convert building_height_ft to meters (height_roof is in feet)
+      'fill-extrusion-height': [
+        '*',
+        ['coalesce', ['to-number', ['get', 'building_height_ft']], 100],
+        0.3048   // ft → m
       ],
+      'fill-extrusion-base': 0,
+      'fill-extrusion-opacity': 0.92,
       'fill-extrusion-vertical-gradient': true,
     }
   }, labelLayerId);
-
-  // ============================================================
-  //  KEEP HIGHLIGHTS STICKY ACROSS ZOOM/PAN
-  //  Mapbox vector tiles re-issue features with NEW IDs every time
-  //  tiles load. So we re-run on:
-  //    - 'idle' (fires when map stops moving + all tiles loaded)
-  //    - 'sourcedata' for composite source (new building tiles arrived)
-  //  We debounce so we don't thrash.
-  // ============================================================
-  let highlightTimer = null;
-  function scheduleHighlight() {
-    if (highlightTimer) clearTimeout(highlightTimer);
-    highlightTimer = setTimeout(() => {
-      highlightDealBuildings();
-    }, 80);
-  }
-
-  // Initial pass — retry up to 20× until tiles load enough buildings
-  let initialAttempts = 0;
-  function initialHighlight() {
-    const found = highlightDealBuildings();
-    initialAttempts++;
-    if (found < deals.features.length && initialAttempts < 20) {
-      setTimeout(initialHighlight, 400);
-    }
-  }
-  map.once('idle', initialHighlight);
-
-  // Sticky re-application
-  map.on('idle', scheduleHighlight);
-  map.on('sourcedata', (e) => {
-    if (e.sourceId === 'composite' && e.isSourceLoaded) scheduleHighlight();
-  });
 
   // ============================================================
   //  GROUND GLOW — soft circle on the ground, pulsing color under each deal
@@ -1247,19 +1202,14 @@ map.on('load', async () => {
   // ============================================================
   //  POPUP ON CLICK — works on highlighted building OR invisible click target
   // ============================================================
-  ['deals-clickable', 'highlighted-buildings'].forEach(layerId => {
+  ['deals-clickable', 'deal-buildings-extruded'].forEach(layerId => {
     map.on('click', layerId, (e) => {
       const f = e.features[0];
-      // For highlighted buildings, find the deal feature by tier match nearby
-      if (f.layer.id === 'highlighted-buildings') {
-        // Find nearest deal point by clicking position
-        const click = e.lngLat;
-        const nearest = deals.features.reduce((best, d) => {
-          const [lng, lat] = d.geometry.coordinates;
-          const dist = Math.hypot(click.lng - lng, click.lat - lat);
-          return (!best || dist < best.dist) ? { feat: d, dist } : best;
-        }, null);
-        if (nearest && nearest.dist < 0.005) showPopup(nearest.feat);
+      // For polygon clicks, find the deal feature by full_name match
+      if (f.layer.id === 'deal-buildings-extruded') {
+        const dealFull = f.properties.full_name;
+        const point = INLINE_DEALS_POINTS.features.find(d => d.properties.full_name === dealFull);
+        if (point) showPopup(point);
       } else {
         showPopup(f);
       }
