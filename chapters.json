@@ -2,12 +2,12 @@
   {
     "id": "intro",
     "eyebrow": "INOVUES \u00b7 MANHATTAN PORTFOLIO",
-    "title": "7 Active Deals",
+    "title": "6 Active Deals",
     "subtitle": "From a single-window mockup on Madison Avenue to a 211,000 ft\u00b2 trophy on Park \u2014 every active opportunity in Manhattan.",
     "stats": [
       [
         "DEALS",
-        "7"
+        "6"
       ],
       [
         "GLASS",
@@ -216,45 +216,14 @@
     }
   },
   {
-    "id": "605 Third Avenue Mockup",
-    "eyebrow": "CHAPTER 07 \u00b7 MIDTOWN",
-    "title": "605 Third Avenue Mockup",
-    "subtitle": "Early-stage lead. 100 ft\u00b2 scope under qualification.",
-    "stats": [
-      [
-        "GLASS",
-        "100 ft\u00b2"
-      ],
-      [
-        "VALUE",
-        "$5K"
-      ],
-      [
-        "STAGE",
-        "4 / 8"
-      ]
-    ],
-    "tier": "small",
-    "camera": {
-      "center": [
-        -73.975162,
-        40.74902
-      ],
-      "zoom": 15.5,
-      "pitch": 45,
-      "bearing": 101,
-      "duration": 5000
-    }
-  },
-  {
     "id": "outro",
     "eyebrow": "MANHATTAN PIPELINE",
     "title": "$11.3M in motion",
-    "subtitle": "7 deals, 316K square feet of Manhattan glass. Every project on the path to compliance and ESG capture.",
+    "subtitle": "6 deals, 315K square feet of Manhattan glass. Every project on the path to compliance and ESG capture.",
     "stats": [
       [
         "DEALS",
-        "7"
+        "6"
       ],
       [
         "GLASS",
@@ -267,13 +236,13 @@
     ],
     "camera": {
       "center": [
-        -73.978,
-        40.76
+        -73.9755,
+        40.757
       ],
-      "zoom": 12.5,
-      "pitch": 50,
-      "bearing": 0,
-      "duration": 5500
+      "zoom": 14.8,
+      "pitch": 60,
+      "bearing": 35,
+      "duration": 6500
     }
   }
 ]
