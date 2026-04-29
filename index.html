@@ -58,18 +58,21 @@ html, body {
 }
 
 /* ============================
-   CHAPTER INTRO OVERLAY
+   COMPACT INTRO CARD (centered, dismissible)
    ============================ */
 .intro-overlay {
   position: fixed;
   inset: 0;
   z-index: 50;
-  background: var(--bg);
+  background: rgba(5, 7, 10, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: auto;
-  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 24px;
 }
 .intro-overlay.hidden {
   opacity: 0;
@@ -77,73 +80,93 @@ html, body {
 }
 
 .intro-inner {
-  width: min(92vw, 1100px);
-  padding: 48px;
+  width: min(92vw, 720px);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 36px 40px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  position: relative;
 }
+
+.intro-close {
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--panel-border);
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 16px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: all 0.15s;
+}
+.intro-close:hover { background: rgba(255,255,255,0.06); color: var(--text); }
 
 .intro-eyebrow {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--brand);
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
 
 .intro-hero {
   font-weight: 900;
-  font-size: clamp(56px, 9vw, 132px);
-  line-height: 0.92;
-  letter-spacing: -0.04em;
-  margin: 0 0 32px 0;
-  -webkit-text-stroke: 2px var(--text);
-  color: transparent;
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin: 0 0 20px 0;
+  color: var(--text);
 }
 
 .intro-hero em {
   font-style: normal;
-  -webkit-text-stroke: 0;
   color: var(--brand);
 }
 
 .intro-sub {
-  font-size: clamp(16px, 1.6vw, 22px);
+  font-size: 14px;
   font-weight: 300;
   color: var(--text-dim);
-  max-width: 720px;
   line-height: 1.5;
-  margin: 0 0 48px 0;
+  margin: 0 0 24px 0;
 }
 
 .intro-stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: 16px;
   border-top: 1px solid var(--panel-border);
-  padding-top: 32px;
-  margin-bottom: 48px;
+  padding-top: 20px;
+  margin-bottom: 28px;
 }
 
 .stat-block .stat-label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.22em;
+  font-size: 9px;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 .stat-block .stat-value {
   font-weight: 700;
-  font-size: clamp(28px, 3.5vw, 44px);
+  font-size: 26px;
   line-height: 1;
   letter-spacing: -0.02em;
   color: var(--text);
 }
 .stat-block .stat-value sup {
-  font-size: 0.5em;
+  font-size: 11px;
   font-weight: 500;
   color: var(--text-dim);
-  margin-left: 4px;
+  margin-left: 3px;
   vertical-align: super;
 }
 
@@ -629,14 +652,15 @@ html, body {
 </head>
 <body>
 
-<!-- ============ INTRO OVERLAY ============ -->
+<!-- ============ INTRO OVERLAY (compact card) ============ -->
 <div class="intro-overlay" id="intro">
   <div class="intro-inner">
+    <button class="intro-close" onclick="document.getElementById('intro').classList.add('hidden')" aria-label="Close">×</button>
     <div class="intro-eyebrow">INOVUES · PORTFOLIO MAP · 2026</div>
     <h1 class="intro-hero">Manhattan,<br>built <em>13&nbsp;ways</em>.</h1>
     <p class="intro-sub">
-      Every active deal in the New York metro &mdash; from LIC mockups to a 211,000&nbsp;ft²
-      flagship on Park Avenue. Sized by glass area, colored by pipeline stage,
+      Every active deal in the New York metro — from LIC mockups to a 211,000&nbsp;ft²
+      flagship on Park Avenue. Sized by deal value, colored by pipeline stage,
       annotated with the work already in motion.
     </p>
     <div class="intro-stats">
@@ -649,11 +673,11 @@ html, body {
         <div class="stat-value">433<sup>K&nbsp;ft²</sup></div>
       </div>
       <div class="stat-block">
-        <div class="stat-label">Pipeline Value</div>
+        <div class="stat-label">Pipeline</div>
         <div class="stat-value">$14.6<sup>M</sup></div>
       </div>
       <div class="stat-block">
-        <div class="stat-label">Mockups Done</div>
+        <div class="stat-label">Mockups</div>
         <div class="stat-value">2</div>
       </div>
     </div>
@@ -755,15 +779,26 @@ const STAGE_TOTAL = 8;
 
 // ============================================================
 //  MAP INITIALIZATION
+//  - Mapbox Standard: built-in photoreal 3D buildings + landmarks
+//  - Cinematic pitch matching viz-steel
 // ============================================================
 const map = new mapboxgl.Map({
   container: 'map',
-  style: 'mapbox://styles/mapbox/dark-v11',
-  center: [-73.9712, 40.7589],   // Midtown Manhattan
-  zoom: 11.4,
-  pitch: 45,
+  style: 'mapbox://styles/mapbox/standard',
+  center: [-73.9764, 40.7589],   // Midtown Manhattan
+  zoom: 12.8,
+  pitch: 60,
   bearing: -17,
   antialias: true,
+  config: {
+    basemap: {
+      lightPreset: 'dusk',          // dusk gives the rich teal/orange that matches our brand
+      showPlaceLabels: true,
+      showRoadLabels: false,         // less clutter
+      showPointOfInterestLabels: false,
+      showTransitLabels: false,
+    }
+  }
 });
 
 map.addControl(new mapboxgl.NavigationControl({ visualizePitch: false }), 'bottom-right');
@@ -773,24 +808,8 @@ map.addControl(new mapboxgl.NavigationControl({ visualizePitch: false }), 'botto
 // ============================================================
 map.on('load', async () => {
 
-  // 3D buildings — adds depth to the cityscape
-  const layers = map.getStyle().layers;
-  const labelLayerId = layers.find(l => l.type === 'symbol' && l.layout && l.layout['text-field'])?.id;
-
-  map.addLayer({
-    id: '3d-buildings',
-    source: 'composite',
-    'source-layer': 'building',
-    filter: ['==', 'extrude', 'true'],
-    type: 'fill-extrusion',
-    minzoom: 12,
-    paint: {
-      'fill-extrusion-color': '#0e1018',
-      'fill-extrusion-height': ['interpolate', ['linear'], ['zoom'], 12, 0, 12.5, ['get','height']],
-      'fill-extrusion-base':   ['interpolate', ['linear'], ['zoom'], 12, 0, 12.5, ['get','min_height']],
-      'fill-extrusion-opacity': 0.85,
-    }
-  }, labelLayerId);
+  // Mapbox Standard handles photoreal 3D buildings + landmarks natively.
+  // No custom fill-extrusion layer needed.
 
   // Inline deal data (embedded so file:// protocol works without a server)
   // For production updates, edit deals.geojson and re-run the inline injection
@@ -809,19 +828,29 @@ map.on('load', async () => {
 
   map.addSource('deals', { type: 'geojson', data: deals });
 
-  // GLOW HALO — soft outer ring
+  // ============================================================
+  //  HUBSPOT DEAL LAYERS — built to POP against the 3D city
+  //  Layer order (bottom → top):
+  //    1. Outer glow halo (large, blurred, very visible)
+  //    2. Inner glow ring (mid, less blurred)
+  //    3. Core dot (saturated, opaque)
+  //    4. Stage indicator ring (white outline thickness = stage progression)
+  //    5. Name + amount label (always on, never collides)
+  // ============================================================
+
+  // 1. OUTER GLOW — big soft halo so deals are unmissable
   map.addLayer({
-    id: 'deals-halo',
+    id: 'deals-halo-outer',
     type: 'circle',
     source: 'deals',
     paint: {
       'circle-radius': [
         'interpolate', ['linear'], ['get', 'amount'],
-        0,        12,
-        100000,   18,
-        1000000,  28,
-        5000000,  48,
-        10000000, 62,
+        0,         24,
+        100000,    36,
+        1000000,   56,
+        5000000,   88,
+        10000000, 110,
       ],
       'circle-color': [
         'match', ['get', 'tier'],
@@ -830,12 +859,38 @@ map.on('load', async () => {
         'mid',      TIER_COLORS.mid,
         TIER_COLORS.small,
       ],
-      'circle-opacity': 0.12,
-      'circle-blur': 1,
+      'circle-opacity': 0.18,
+      'circle-blur': 1.2,
     }
   });
 
-  // CORE DOT — sized by deal amount
+  // 2. INNER GLOW — sharper edge for definition
+  map.addLayer({
+    id: 'deals-halo-inner',
+    type: 'circle',
+    source: 'deals',
+    paint: {
+      'circle-radius': [
+        'interpolate', ['linear'], ['get', 'amount'],
+        0,         14,
+        100000,    20,
+        1000000,   32,
+        5000000,   54,
+        10000000,  68,
+      ],
+      'circle-color': [
+        'match', ['get', 'tier'],
+        'flagship', TIER_COLORS.flagship,
+        'major',    TIER_COLORS.major,
+        'mid',      TIER_COLORS.mid,
+        TIER_COLORS.small,
+      ],
+      'circle-opacity': 0.32,
+      'circle-blur': 0.6,
+    }
+  });
+
+  // 3. CORE DOT — sized by deal amount, fully saturated
   map.addLayer({
     id: 'deals-dot',
     type: 'circle',
@@ -843,11 +898,11 @@ map.on('load', async () => {
     paint: {
       'circle-radius': [
         'interpolate', ['linear'], ['get', 'amount'],
-        0,        4,
-        100000,   6,
-        1000000,  9,
-        5000000,  14,
-        10000000, 18,
+        0,         6,
+        100000,    9,
+        1000000,   14,
+        5000000,   22,
+        10000000,  28,
       ],
       'circle-color': [
         'match', ['get', 'tier'],
@@ -856,37 +911,94 @@ map.on('load', async () => {
         'mid',      TIER_COLORS.mid,
         TIER_COLORS.small,
       ],
-      'circle-stroke-width': 2,
-      'circle-stroke-color': '#05070a',
-      'circle-opacity': 0.95,
+      'circle-stroke-width': 2.5,
+      'circle-stroke-color': '#ffffff',
+      'circle-opacity': 1,
     }
   });
 
-  // LABELS — only show name for major+ deals
+  // 4. NAME LABEL — always on, every deal
   map.addLayer({
     id: 'deals-label',
     type: 'symbol',
     source: 'deals',
     layout: {
       'text-field': ['get', 'name'],
-      'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
+      'text-font': ['DIN Pro Bold', 'Arial Unicode MS Bold'],
       'text-size': [
-        'interpolate', ['linear'], ['get','amount'],
-        0, 0,                // hide small
-        100000, 0,
-        100001, 11,          // show mid+
-        5000000, 13,
+        'interpolate', ['linear'], ['get', 'amount'],
+        0,         11,
+        1000000,   13,
+        5000000,   16,
+        10000000,  18,
       ],
-      'text-offset': [0, 1.4],
+      'text-offset': [
+        'interpolate', ['linear'], ['get', 'amount'],
+        0,         ['literal', [0, 1.5]],
+        1000000,   ['literal', [0, 2.0]],
+        5000000,   ['literal', [0, 2.6]],
+      ],
       'text-anchor': 'top',
       'text-allow-overlap': false,
-      'text-letter-spacing': 0.05,
+      'text-ignore-placement': false,
+      'text-letter-spacing': 0.04,
+      'text-max-width': 10,
     },
     paint: {
-      'text-color': '#f2f4f8',
+      'text-color': '#ffffff',
       'text-halo-color': '#05070a',
-      'text-halo-width': 1.4,
+      'text-halo-width': 2,
       'text-halo-blur': 0.5,
+    }
+  });
+
+  // 5. AMOUNT LABEL — below the name, monospace, color-coded
+  map.addLayer({
+    id: 'deals-amount',
+    type: 'symbol',
+    source: 'deals',
+    layout: {
+      'text-field': [
+        'concat',
+        ['case',
+          ['>=', ['get', 'amount'], 1000000],
+            ['concat', '$', ['number-format', ['/', ['get', 'amount'], 1000000], { 'min-fraction-digits': 1, 'max-fraction-digits': 1 }], 'M'],
+          ['>=', ['get', 'amount'], 1000],
+            ['concat', '$', ['number-format', ['/', ['get', 'amount'], 1000], { 'min-fraction-digits': 0, 'max-fraction-digits': 0 }], 'K'],
+          ['concat', '$', ['number-format', ['get', 'amount'], { 'min-fraction-digits': 0, 'max-fraction-digits': 0 }]]
+        ],
+        '  ·  STAGE ',
+        ['to-string', ['get', 'stage_idx']],
+        '/8'
+      ],
+      'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
+      'text-size': [
+        'interpolate', ['linear'], ['get', 'amount'],
+        0,         9.5,
+        1000000,   11,
+        5000000,   13,
+      ],
+      'text-offset': [
+        'interpolate', ['linear'], ['get', 'amount'],
+        0,         ['literal', [0, 2.8]],
+        1000000,   ['literal', [0, 3.4]],
+        5000000,   ['literal', [0, 4.2]],
+      ],
+      'text-anchor': 'top',
+      'text-allow-overlap': false,
+      'text-letter-spacing': 0.12,
+    },
+    paint: {
+      'text-color': [
+        'match', ['get', 'tier'],
+        'flagship', TIER_COLORS.flagship,
+        'major',    TIER_COLORS.major,
+        'mid',      TIER_COLORS.mid,
+        TIER_COLORS.small,
+      ],
+      'text-halo-color': '#05070a',
+      'text-halo-width': 2,
+      'text-halo-blur': 0.4,
     }
   });
 
