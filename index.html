@@ -632,6 +632,223 @@ html, body {
   .footer-bar { bottom: 16px; left: 16px; }
   .intro-stats { grid-template-columns: 1fr 1fr; }
 }
+
+/* ============================
+   CHAPTER CALLOUT — bottom center, animates in/out
+   ============================ */
+#chapter {
+  position: fixed;
+  left: 50%;
+  bottom: 88px;
+  transform: translateX(-50%) translateY(20px);
+  z-index: 25;
+  width: min(680px, calc(100vw - 48px));
+  padding: 22px 28px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+#chapter.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+#chapter .ch-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 8px;
+}
+#chapter.tier-flagship .ch-eyebrow { color: var(--accent-2); }
+#chapter.tier-major .ch-eyebrow { color: var(--accent); }
+#chapter.tier-mid .ch-eyebrow { color: var(--brand); }
+
+#chapter .ch-title {
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 8px 0;
+  color: var(--text);
+}
+
+#chapter .ch-subtitle {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--text-dim);
+  margin: 0 0 16px 0;
+}
+
+#chapter .ch-stats {
+  display: flex;
+  gap: 28px;
+  border-top: 1px solid var(--panel-border);
+  padding-top: 14px;
+}
+#chapter .ch-stat {
+  display: flex;
+  flex-direction: column;
+}
+#chapter .ch-stat-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+#chapter .ch-stat-val {
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+/* ============================
+   CHAPTER NAV — clickable dots top center
+   ============================ */
+.chapter-nav {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 25;
+  display: flex;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 24px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: var(--shadow);
+}
+.chapter-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  padding: 0;
+}
+.chapter-dot:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(1.3);
+}
+.chapter-dot.active {
+  background: var(--brand);
+  box-shadow: 0 0 12px rgba(0, 164, 189, 0.7);
+  transform: scale(1.4);
+}
+.chapter-dot.passed {
+  background: rgba(0, 164, 189, 0.5);
+}
+
+/* ============================
+   FLIGHT CONTROLS — bottom right above zoom controls
+   ============================ */
+.flight-controls {
+  position: fixed;
+  bottom: 84px;
+  right: 24px;
+  z-index: 25;
+  display: flex;
+  gap: 6px;
+}
+.flight-btn {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.flight-btn:hover {
+  background: rgba(0, 164, 189, 0.15);
+  border-color: var(--brand);
+}
+.flight-btn.primary {
+  background: var(--brand);
+  color: var(--bg);
+  border-color: var(--brand);
+}
+.flight-btn.primary:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ============================
+   PROGRESS BAR — top edge of viewport
+   ============================ */
+.flight-progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.04);
+  pointer-events: none;
+}
+.flight-progress-fill {
+  height: 100%;
+  background: var(--brand);
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+/* ============================
+   KEYBOARD HINT
+   ============================ */
+.kbd-hint {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 6px 12px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  pointer-events: none;
+  opacity: 0.7;
+}
+.kbd-hint kbd {
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1px 5px;
+  border-radius: 3px;
+  margin: 0 2px;
+  color: var(--text-dim);
+}
 </style>
 </head>
 <body>
@@ -666,7 +883,7 @@ html, body {
       </div>
     </div>
     <button class="intro-cta" onclick="document.getElementById('intro').classList.add('hidden')">
-      Open the map
+      Start the tour
     </button>
   </div>
 </div>
@@ -719,6 +936,31 @@ html, body {
   <span class="sep">·</span>
   <span><span class="legend-dot" style="background:#6a7588"></span>Early</span>
 </div>
+
+<!-- ============ FLYTHROUGH PROGRESS BAR ============ -->
+<div class="flight-progress" id="flightProgress">
+  <div class="flight-progress-fill" id="flightProgressFill"></div>
+</div>
+
+<!-- ============ CHAPTER NAV (dots top center) ============ -->
+<div class="chapter-nav" id="chapterNav"></div>
+
+<!-- ============ CHAPTER CALLOUT (bottom center) ============ -->
+<div id="chapter">
+  <div class="ch-eyebrow" id="chEyebrow"></div>
+  <h3 class="ch-title" id="chTitle"></h3>
+  <p class="ch-subtitle" id="chSubtitle"></p>
+  <div class="ch-stats" id="chStats"></div>
+</div>
+
+<!-- ============ FLIGHT CONTROLS ============ -->
+<div class="flight-controls">
+  <button class="flight-btn primary" id="flyBtn">▶ Play Tour</button>
+  <button class="flight-btn" id="resetBtn">Reset View</button>
+</div>
+
+<!-- ============ KEYBOARD HINT ============ -->
+<div class="kbd-hint"><kbd>SPACE</kbd> play / pause &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> chapter</div>
 
 <script>
 // ============================================================
@@ -976,49 +1218,7 @@ map.on('load', async () => {
     }
   });
 
-  map.addLayer({
-    id: 'deals-amount',
-    type: 'symbol',
-    source: 'deals',
-    layout: {
-      'text-field': [
-        'concat',
-        ['case',
-          ['>=', ['get', 'amount'], 1000000],
-            ['concat', '$', ['number-format', ['/', ['get', 'amount'], 1000000], { 'min-fraction-digits': 1, 'max-fraction-digits': 1 }], 'M'],
-          ['>=', ['get', 'amount'], 1000],
-            ['concat', '$', ['number-format', ['/', ['get', 'amount'], 1000], { 'min-fraction-digits': 0, 'max-fraction-digits': 0 }], 'K'],
-          ['concat', '$', ['number-format', ['get', 'amount'], { 'min-fraction-digits': 0, 'max-fraction-digits': 0 }]]
-        ],
-        '  ·  STAGE ',
-        ['to-string', ['get', 'stage_idx']],
-        '/8'
-      ],
-      'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
-      'text-size': [
-        'interpolate', ['linear'], ['get', 'amount'],
-        0,         9.5,
-        1000000,   11,
-        5000000,   13,
-      ],
-      'text-offset': [0, -1.4],
-      'text-anchor': 'bottom',
-      'text-allow-overlap': true,
-      'text-letter-spacing': 0.12,
-    },
-    paint: {
-      'text-color': [
-        'match', ['get', 'tier'],
-        'flagship', TIER_COLORS.flagship,
-        'major',    TIER_COLORS.major,
-        'mid',      TIER_COLORS.mid,
-        TIER_COLORS.small,
-      ],
-      'text-halo-color': '#05070a',
-      'text-halo-width': 2,
-      'text-halo-blur': 0.4,
-    }
-  });
+  // (Amount/Stage label removed — value now revealed on hover via tooltip)
 
   // INVISIBLE click-target on each deal point
   map.addLayer({
@@ -1224,6 +1424,223 @@ function formatShortDate(s) {
   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   return `${months[+m - 1]} ${d}, '${y}`;
 }
+
+
+// ============================================================
+//  HOVER TOOLTIP — show $ amount on hover
+// ============================================================
+const hoverTooltip = new mapboxgl.Popup({
+  closeButton: false,
+  closeOnClick: false,
+  offset: 14,
+  className: 'hover-tooltip',
+  maxWidth: '220px'
+});
+
+['deals-clickable'].forEach(layerId => {
+  map.on('mouseenter', layerId, (e) => {
+    const f = e.features[0];
+    const p = f.properties;
+    const coords = f.geometry.coordinates.slice();
+    const amt = formatMoney(+p.amount);
+    const sf = (+p.sf).toLocaleString();
+    hoverTooltip
+      .setLngLat(coords)
+      .setHTML(`
+        <div style="padding:10px 14px;font-family:Inter,sans-serif;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--brand);margin-bottom:4px;">${p.area}</div>
+          <div style="font-weight:700;font-size:14px;color:#fff;margin-bottom:6px;">${p.name}</div>
+          <div style="display:flex;gap:14px;font-family:'JetBrains Mono',monospace;font-size:11px;">
+            <span style="color:var(--text-dim);">${sf} ft²</span>
+            <span style="font-weight:600;color:${TIER_COLORS[p.tier]||'#fff'};">${amt}</span>
+            <span style="color:var(--text-muted);">STG ${p.stage_idx}/8</span>
+          </div>
+        </div>
+      `)
+      .addTo(map);
+  });
+  map.on('mouseleave', layerId, () => {
+    hoverTooltip.remove();
+  });
+});
+
+// ============================================================
+//  CINEMATIC FLYTHROUGH ENGINE
+//  - State machine with timers we can clear on pause/skip
+//  - Each chapter: flyTo camera + show callout + auto-advance
+// ============================================================
+const CHAPTERS = [{"id": "intro", "eyebrow": "INOVUES \u00b7 NYC PORTFOLIO", "title": "12 Active Deals", "subtitle": "From Park Avenue trophies to outer-borough mockups \u2014 every active opportunity in the metro pipeline.", "stats": [["DEALS", "12"], ["GLASS", "391K ft\u00b2"], ["PIPELINE", "$13.3M"]], "camera": {"center": [-73.97, 40.78], "zoom": 10.5, "pitch": 45, "bearing": -10, "duration": 4500}}, {"id": "200 Orange Street, New Haven", "eyebrow": "CHAPTER 01 \u00b7 NEW HAVEN", "title": "200 Orange Street, New Haven", "subtitle": "Early-stage lead. 1,200 ft\u00b2 scope under qualification.", "stats": [["GLASS", "1,200 ft\u00b2"], ["VALUE", "$50K"], ["STAGE", "1 / 8"]], "tier": "small", "camera": {"center": [-72.923434, 41.307101], "zoom": 15.0, "pitch": 65, "bearing": 317, "duration": 5000}}, {"id": "Morrisania DTC Center", "eyebrow": "CHAPTER 02 \u00b7 BRONX", "title": "Morrisania DTC Center", "subtitle": "Early-stage lead. 2,503 ft\u00b2 scope under qualification.", "stats": [["GLASS", "2,503 ft\u00b2"], ["VALUE", "$65K"], ["STAGE", "4 / 8"]], "tier": "small", "camera": {"center": [-73.920257, 40.836246], "zoom": 15.0, "pitch": 65, "bearing": -26, "duration": 5000}}, {"id": "NY Presbyterian-Luxwall", "eyebrow": "CHAPTER 03 \u00b7 UES", "title": "NY Presbyterian-Luxwall", "subtitle": "Mid-size opportunity. 2,500 ft\u00b2 scope. Typical INOVUES deployment.", "stats": [["GLASS", "2,500 ft\u00b2"], ["VALUE", "$140K"], ["STAGE", "4 / 8"]], "tier": "mid", "camera": {"center": [-73.95448, 40.764353], "zoom": 15.0, "pitch": 65, "bearing": -9, "duration": 5000}}, {"id": "1700 Broadway, NYC", "eyebrow": "CHAPTER 04 \u00b7 MIDTOWN WEST", "title": "1700 Broadway", "subtitle": "Major project. 50,000 ft\u00b2 of glass area, $2.0M in retrofit revenue.", "stats": [["GLASS", "50,000 ft\u00b2"], ["VALUE", "$2.0M"], ["STAGE", "1 / 8"]], "tier": "major", "camera": {"center": [-73.982374, 40.763462], "zoom": 15.5, "pitch": 65, "bearing": 8, "duration": 5000}}, {"id": "437 Madison Avenue (Mockup)", "eyebrow": "CHAPTER 05 \u00b7 MIDTOWN", "title": "437 Madison Avenue", "subtitle": "Early-stage lead. 53 ft\u00b2 scope under qualification.", "stats": [["GLASS", "53 ft\u00b2"], ["VALUE", "$9K"], ["STAGE", "4 / 8"]], "tier": "small", "camera": {"center": [-73.975372, 40.757478], "zoom": 15.0, "pitch": 65, "bearing": 25, "duration": 5000}}, {"id": "437 Madison Avenue, NYC", "eyebrow": "CHAPTER 06 \u00b7 MIDTOWN", "title": "437 Madison Avenue", "subtitle": "Mid-size opportunity. 40,000 ft\u00b2 scope. Typical INOVUES deployment.", "stats": [["GLASS", "40,000 ft\u00b2"], ["VALUE", "$250K"], ["STAGE", "1 / 8"]], "tier": "mid", "camera": {"center": [-73.975372, 40.757478], "zoom": 15.0, "pitch": 65, "bearing": 42, "duration": 5000}}, {"id": "277 Park Ave NYC", "eyebrow": "CHAPTER 07 \u00b7 MIDTOWN EAST", "title": "277 Park Ave NYC", "subtitle": "Flagship trophy asset. 211,050 ft\u00b2 of glass \u2014 among the largest opportunities in the NYC pipeline.", "stats": [["GLASS", "211,050 ft\u00b2"], ["VALUE", "$8.4M"], ["STAGE", "3 / 8"]], "tier": "flagship", "camera": {"center": [-73.9742, 40.7568], "zoom": 16.2, "pitch": 65, "bearing": 59, "duration": 5000}}, {"id": "445 Fifth Avenue", "eyebrow": "CHAPTER 08 \u00b7 MIDTOWN", "title": "445 Fifth Avenue", "subtitle": "Mid-size opportunity. 11,872 ft\u00b2 scope. Typical INOVUES deployment.", "stats": [["GLASS", "11,872 ft\u00b2"], ["VALUE", "$481K"], ["STAGE", "4 / 8"]], "tier": "mid", "camera": {"center": [-73.979784, 40.754493], "zoom": 15.0, "pitch": 65, "bearing": 76, "duration": 5000}}, {"id": "605 Third Avenue Mockup", "eyebrow": "CHAPTER 09 \u00b7 MIDTOWN", "title": "605 Third Avenue Mockup", "subtitle": "Early-stage lead. 100 ft\u00b2 scope under qualification.", "stats": [["GLASS", "100 ft\u00b2"], ["VALUE", "$5K"], ["STAGE", "4 / 8"]], "tier": "small", "camera": {"center": [-73.975162, 40.74902], "zoom": 15.0, "pitch": 65, "bearing": 93, "duration": 5000}}, {"id": "24 Crecent St.", "eyebrow": "CHAPTER 10 \u00b7 LIC", "title": "24 Crecent St.", "subtitle": "Early-stage lead. 423 ft\u00b2 scope under qualification.", "stats": [["GLASS", "423 ft\u00b2"], ["VALUE", "$20K"], ["STAGE", "4 / 8"]], "tier": "small", "camera": {"center": [-73.926412, 40.765173], "zoom": 15.0, "pitch": 65, "bearing": 110, "duration": 5000}}, {"id": "745 Broad St., Newark, NJ", "eyebrow": "CHAPTER 11 \u00b7 NEWARK", "title": "745 Broad St., Newark, NJ", "subtitle": "Major project. 51,423 ft\u00b2 of glass area, $1.4M in retrofit revenue.", "stats": [["GLASS", "51,423 ft\u00b2"], ["VALUE", "$1.4M"], ["STAGE", "4 / 8"]], "tier": "major", "camera": {"center": [-74.171739, 40.736755], "zoom": 15.5, "pitch": 65, "bearing": 127, "duration": 5000}}, {"id": "315 Meserole St, Brooklyn, NY", "eyebrow": "CHAPTER 12 \u00b7 BUSHWICK", "title": "315 Meserole St, Brooklyn", "subtitle": "Mid-size opportunity. 20,000 ft\u00b2 scope. Typical INOVUES deployment.", "stats": [["GLASS", "20,000 ft\u00b2"], ["VALUE", "$500K"], ["STAGE", "2 / 8"]], "tier": "mid", "camera": {"center": [-73.935246, 40.709036], "zoom": 15.0, "pitch": 65, "bearing": 144, "duration": 5000}}, {"id": "outro", "eyebrow": "PIPELINE TOTAL", "title": "$13.3M in motion", "subtitle": "12 deals, 391,000 square feet of glass, one technology. Every project on the path to compliance and ESG capture.", "stats": [["DEALS", "12"], ["GLASS", "391K ft\u00b2"], ["PIPELINE", "$13.3M"]], "camera": {"center": [-73.97, 40.76], "zoom": 11.2, "pitch": 40, "bearing": 0, "duration": 5500}}];
+
+let flightIdx = 0;
+let flightRunning = false;
+let flightTimers = [];
+let progressRAF = null;
+
+function clearFlight() {
+  flightTimers.forEach(clearTimeout);
+  flightTimers = [];
+  if (progressRAF) cancelAnimationFrame(progressRAF);
+}
+
+function buildChapterNav() {
+  const nav = document.getElementById('chapterNav');
+  nav.innerHTML = CHAPTERS.map((c, i) =>
+    `<button class="chapter-dot" data-idx="${i}" title="${c.title}"></button>`
+  ).join('');
+  nav.querySelectorAll('.chapter-dot').forEach(d => {
+    d.addEventListener('click', () => {
+      flightIdx = +d.dataset.idx;
+      stepChapter();
+    });
+  });
+}
+
+function markChapterActive(idx) {
+  document.querySelectorAll('.chapter-dot').forEach((d, i) => {
+    d.classList.remove('active', 'passed');
+    if (i < idx) d.classList.add('passed');
+    if (i === idx) d.classList.add('active');
+  });
+}
+
+function showChapter(ch) {
+  const el = document.getElementById('chapter');
+  document.getElementById('chEyebrow').textContent = ch.eyebrow;
+  document.getElementById('chTitle').textContent = ch.title;
+  document.getElementById('chSubtitle').textContent = ch.subtitle;
+  // Stats
+  document.getElementById('chStats').innerHTML = (ch.stats || []).map(([lbl, val]) =>
+    `<div class="ch-stat"><div class="ch-stat-lbl">${lbl}</div><div class="ch-stat-val">${val}</div></div>`
+  ).join('');
+  // Tier-based eyebrow color
+  el.classList.remove('tier-flagship','tier-major','tier-mid','tier-small');
+  if (ch.tier) el.classList.add('tier-' + ch.tier);
+  el.classList.add('show');
+}
+
+function hideChapter() {
+  document.getElementById('chapter').classList.remove('show');
+}
+
+function playFlythrough() {
+  if (flightRunning) {
+    pauseFlythrough();
+    return;
+  }
+  flightRunning = true;
+  document.getElementById('flyBtn').innerHTML = '⏸ Pause Tour';
+  if (flightIdx >= CHAPTERS.length) flightIdx = 0;
+  stepChapter();
+}
+
+function pauseFlythrough() {
+  flightRunning = false;
+  clearFlight();
+  document.getElementById('flyBtn').innerHTML = '▶ Resume Tour';
+  map.stop();
+}
+
+function endFlight() {
+  flightRunning = false;
+  clearFlight();
+  hideChapter();
+  flightIdx = 0;
+  document.getElementById('flyBtn').innerHTML = '▶ Play Tour';
+  document.getElementById('flightProgressFill').style.width = '0%';
+  markChapterActive(-1);
+}
+
+function stepChapter() {
+  if (flightIdx >= CHAPTERS.length) { endFlight(); return; }
+  if (!flightRunning) return;
+
+  const ch = CHAPTERS[flightIdx];
+  const idx = flightIdx;
+  markChapterActive(idx);
+  flightIdx++;
+
+  // Camera fly
+  map.flyTo({
+    center: ch.camera.center,
+    zoom: ch.camera.zoom,
+    pitch: ch.camera.pitch,
+    bearing: ch.camera.bearing,
+    duration: ch.camera.duration,
+    essential: true,
+    curve: 1.5,
+    speed: 0.6,
+  });
+
+  // Callout in mid-flight
+  flightTimers.push(setTimeout(() => {
+    if (flightRunning) showChapter(ch);
+  }, 700));
+
+  // Hide callout shortly before next move (so transitions feel clean)
+  flightTimers.push(setTimeout(() => {
+    if (flightRunning) hideChapter();
+  }, ch.camera.duration - 500));
+
+  // Progress bar
+  const t0 = performance.now();
+  const animProg = () => {
+    if (!flightRunning) return;
+    const elapsed = performance.now() - t0;
+    const chFrac = Math.min(1, elapsed / ch.camera.duration);
+    const pct = 100 * (idx + chFrac) / CHAPTERS.length;
+    document.getElementById('flightProgressFill').style.width = pct + '%';
+    if (chFrac < 1) progressRAF = requestAnimationFrame(animProg);
+  };
+  progressRAF = requestAnimationFrame(animProg);
+
+  // Schedule next chapter
+  flightTimers.push(setTimeout(stepChapter, ch.camera.duration + 200));
+}
+
+function skipChapter(direction) {
+  pauseFlythrough();
+  flightIdx = Math.max(0, Math.min(CHAPTERS.length - 1, flightIdx - 1 + direction));
+  // Single-step jump without auto-advance
+  const ch = CHAPTERS[flightIdx];
+  markChapterActive(flightIdx);
+  map.flyTo({ ...ch.camera, duration: 1500, essential: true });
+  setTimeout(() => showChapter(ch), 600);
+}
+
+// ============================================================
+//  HOOK UP CONTROLS
+// ============================================================
+buildChapterNav();
+
+document.getElementById('flyBtn').addEventListener('click', playFlythrough);
+document.getElementById('resetBtn').addEventListener('click', () => {
+  pauseFlythrough();
+  endFlight();
+  map.flyTo({
+    center: [-73.9764, 40.7589],
+    zoom: 12.8, pitch: 60, bearing: -17,
+    duration: 1500
+  });
+});
+
+// Keyboard: SPACE play/pause, arrows skip
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (e.code === 'Space') { e.preventDefault(); playFlythrough(); }
+  else if (e.code === 'ArrowRight') { e.preventDefault(); skipChapter(1); }
+  else if (e.code === 'ArrowLeft')  { e.preventDefault(); skipChapter(-1); }
+  else if (e.code === 'Escape') { pauseFlythrough(); endFlight(); }
+});
+
+// Auto-start tour when intro is dismissed
+const introEl = document.getElementById('intro');
+const observer = new MutationObserver(() => {
+  if (introEl.classList.contains('hidden') && !flightRunning && flightIdx === 0) {
+    setTimeout(playFlythrough, 400);
+  }
+});
+observer.observe(introEl, { attributes: true, attributeFilter: ['class'] });
+
 
 } // end bootApp()
 </script>
