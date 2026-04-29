@@ -1,0 +1,23 @@
+{
+  "total_deals": 13,
+  "total_sf": 433238,
+  "total_pipeline_usd": 14605669.66,
+  "mockups_completed": 2,
+  "stage_counts": {
+    "RFQ / Qualified to buy": 7,
+    "Potential Building/Lead": 3,
+    "Filled Initial Survey Form": 1,
+    "RFI for a Building": 1,
+    "Passed Technical / Cost-Benefit Evaluation": 1
+  },
+  "stage_order": [
+    "Potential Building/Lead",
+    "RFI for a Building",
+    "Filled Initial Survey Form",
+    "RFQ / Qualified to buy",
+    "Project Proposal Requested",
+    "Project Proposal Approved",
+    "Passed Technical / Cost-Benefit Evaluation",
+    "Budget Proposal Accepted / Decision Maker Bought-In"
+  ]
+}

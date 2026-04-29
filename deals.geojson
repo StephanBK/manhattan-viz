@@ -1,0 +1,330 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.975162,
+          40.74902
+        ]
+      },
+      "properties": {
+        "name": "605 Third Avenue Mockup",
+        "full_name": "605 Third Avenue Mockup",
+        "area": "Midtown",
+        "stage": "RFQ / Qualified to buy",
+        "stage_idx": 4,
+        "stage_total": 8,
+        "sf": 100,
+        "amount": 5000.0,
+        "tier": "small",
+        "is_mockup": true,
+        "created": "3/5/26 17:42",
+        "close": "8/14/26 17:41",
+        "address": "605 Third Avenue, New York, New York 10158, United States"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.979784,
+          40.754493
+        ]
+      },
+      "properties": {
+        "name": "445 Fifth Avenue",
+        "full_name": "445 Fifth Avenue",
+        "area": "Midtown",
+        "stage": "RFQ / Qualified to buy",
+        "stage_idx": 4,
+        "stage_total": 8,
+        "sf": 11872,
+        "amount": 481425.32,
+        "tier": "mid",
+        "is_mockup": false,
+        "created": "2/5/26 15:06",
+        "close": "12/31/27 11:19",
+        "address": "445 Fifth Avenue, New York, New York 10173, United States"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.926412,
+          40.765173
+        ]
+      },
+      "properties": {
+        "name": "24 Crecent St.",
+        "full_name": "24 Crecent St.",
+        "area": "LIC",
+        "stage": "RFQ / Qualified to buy",
+        "stage_idx": 4,
+        "stage_total": 8,
+        "sf": 423,
+        "amount": 19958.15,
+        "tier": "small",
+        "is_mockup": false,
+        "created": "2/5/26 11:16",
+        "close": "6/5/26 11:15",
+        "address": "Crescent Street, Astoria, New York 11106, United States"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.923434,
+          41.307101
+        ]
+      },
+      "properties": {
+        "name": "200 Orange Street, New Haven",
+        "full_name": "200 Orange Street, New Haven",
+        "area": "New Haven",
+        "stage": "Potential Building/Lead",
+        "stage_idx": 1,
+        "stage_total": 8,
+        "sf": 1200,
+        "amount": 50000.0,
+        "tier": "small",
+        "is_mockup": false,
+        "created": "1/21/26 15:03",
+        "close": "7/23/26 15:03",
+        "address": "200 Orange Street, New Haven, Connecticut 06510, United States"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95448,
+          40.764353
+        ]
+      },
+      "properties": {
+        "name": "NY Presbyterian-Luxwall",
+        "full_name": "NY Presbyterian-Luxwall",
+        "area": "UES",
+        "stage": "RFQ / Qualified to buy",
+        "stage_idx": 4,
+        "stage_total": 8,
+        "sf": 2500,
+        "amount": 140000.0,
+        "tier": "mid",
+        "is_mockup": false,
+        "created": "12/2/25 11:49",
+        "close": "9/30/26 11:21",
+        "address": "525 East 68th Street, New York, New York 10065, United States"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.975372,
+          40.757478
+        ]
+      },
+      "properties": {
+        "name": "437 Madison Avenue",
+        "full_name": "437 Madison Avenue (Mockup)",
+        "area": "Midtown",
+        "stage": "RFQ / Qualified to buy",
+        "stage_idx": 4,
+        "stage_total": 8,
+        "sf": 53,
+        "amount": 8568.53,
+        "tier": "small",
+        "is_mockup": true,
+        "created": "9/3/25 23:03",
+        "close": "9/30/26 11:23",
+        "address": "437 Madison Avenue, New York, New York 10022, United States"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.975372,
+          40.757478
+        ]
+      },
+      "properties": {
+        "name": "437 Madison Avenue",
+        "full_name": "437 Madison Avenue, NYC",
+        "area": "Midtown",
+        "stage": "Potential Building/Lead",
+        "stage_idx": 1,
+        "stage_total": 8,
+        "sf": 40000,
+        "amount": 250000.0,
+        "tier": "mid",
+        "is_mockup": false,
+        "created": "8/27/25 15:08",
+        "close": "2/20/25 15:07",
+        "address": "437 Madison Avenue, New York, New York 10022, United States"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9742,
+          40.7568
+        ]
+      },
+      "properties": {
+        "name": "277 Park Ave NYC",
+        "full_name": "277 Park Ave NYC",
+        "area": "Midtown East",
+        "stage": "Filled Initial Survey Form",
+        "stage_idx": 3,
+        "stage_total": 8,
+        "sf": 211050,
+        "amount": 8442000.0,
+        "tier": "flagship",
+        "is_mockup": false,
+        "created": "8/22/25 16:41",
+        "close": "3/31/27 12:17",
+        "address": "277 Park Avenue, Manhattan, NY 10172 (corrected)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.982374,
+          40.763462
+        ]
+      },
+      "properties": {
+        "name": "1700 Broadway",
+        "full_name": "1700 Broadway, NYC",
+        "area": "Midtown West",
+        "stage": "Potential Building/Lead",
+        "stage_idx": 1,
+        "stage_total": 8,
+        "sf": 50000,
+        "amount": 2000000.0,
+        "tier": "major",
+        "is_mockup": false,
+        "created": "8/18/25 8:34",
+        "close": "8/21/26 15:05",
+        "address": "1700 Broadway, New York, New York 10019, United States"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.171739,
+          40.736755
+        ]
+      },
+      "properties": {
+        "name": "745 Broad St., Newark, NJ",
+        "full_name": "745 Broad St., Newark, NJ",
+        "area": "Newark",
+        "stage": "RFQ / Qualified to buy",
+        "stage_idx": 4,
+        "stage_total": 8,
+        "sf": 51423,
+        "amount": 1380050.89,
+        "tier": "major",
+        "is_mockup": false,
+        "created": "7/16/25 16:39",
+        "close": "12/31/26 11:24",
+        "address": "745 Broad Street, Newark, New Jersey 07102, United States"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.935246,
+          40.709036
+        ]
+      },
+      "properties": {
+        "name": "315 Meserole St, Brooklyn",
+        "full_name": "315 Meserole St, Brooklyn, NY",
+        "area": "Bushwick",
+        "stage": "RFI for a Building",
+        "stage_idx": 2,
+        "stage_total": 8,
+        "sf": 20000,
+        "amount": 500000.0,
+        "tier": "mid",
+        "is_mockup": false,
+        "created": "6/2/25 22:47",
+        "close": "6/30/27 12:19",
+        "address": "315 Meserole Street, Brooklyn, New York 11206, United States"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98712,
+          40.760372
+        ]
+      },
+      "properties": {
+        "name": "The Biltmore Apartments",
+        "full_name": "The Biltmore Apartments, NYC",
+        "area": "Midtown",
+        "stage": "Passed Technical / Cost-Benefit Evaluation",
+        "stage_idx": 7,
+        "stage_total": 8,
+        "sf": 42114,
+        "amount": 1263432.0,
+        "tier": "major",
+        "is_mockup": false,
+        "created": "6/2/25 22:43",
+        "close": "12/31/26 12:16",
+        "address": "271 West 47th Street, New York, New York 10036, United States"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.920257,
+          40.836246
+        ]
+      },
+      "properties": {
+        "name": "Morrisania DTC Center",
+        "full_name": "Morrisania DTC Center",
+        "area": "Bronx",
+        "stage": "RFQ / Qualified to buy",
+        "stage_idx": 4,
+        "stage_total": 8,
+        "sf": 2503,
+        "amount": 65234.77,
+        "tier": "small",
+        "is_mockup": false,
+        "created": "6/1/25 16:15",
+        "close": "12/31/27 12:21",
+        "address": "1225 Gerard Avenue, Bronx, New York 10452, United States"
+      }
+    }
+  ]
+}
