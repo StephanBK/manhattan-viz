@@ -1071,6 +1071,28 @@ map.on('load', async () => {
   const layers = map.getStyle().layers;
   const labelLayerId = layers.find(l => l.type === 'symbol' && l.layout && l.layout['text-field'])?.id;
 
+  // ============================================================
+  //  DIM BUILT-IN MAP LABELS so our deal labels can breathe
+  //  We don't remove them (street names still useful for context)
+  //  but we lower their opacity and make POI/landmark labels even dimmer.
+  // ============================================================
+  layers.forEach(l => {
+    if (l.type !== 'symbol') return;
+    const id = l.id.toLowerCase();
+    // POI + landmark labels (Trump Tower, Hotel 57, Waldorf etc.) — kill these
+    if (id.includes('poi') || id.includes('landmark') || id.includes('place')) {
+      try { map.setLayoutProperty(l.id, 'visibility', 'none'); } catch {}
+      return;
+    }
+    // Street labels — keep but dim heavily
+    if (id.includes('road') || id.includes('street') || id.includes('label')) {
+      try {
+        map.setPaintProperty(l.id, 'text-opacity', 0.45);
+        map.setPaintProperty(l.id, 'text-halo-width', 0.5);
+      } catch {}
+    }
+  });
+
   // Background: ALL NYC buildings, uniform dark gray
   map.addLayer({
     id: 'city-buildings',
@@ -1156,7 +1178,7 @@ map.on('load', async () => {
   });
 
   // ============================================================
-  //  NAME + AMOUNT + STAGE LABELS (always on)
+  //  NAME LABELS — modest, zoom-aware, no overlap
   // ============================================================
   map.addLayer({
     id: 'deals-label',
@@ -1164,25 +1186,28 @@ map.on('load', async () => {
     source: 'deals',
     layout: {
       'text-field': ['get', 'name'],
-      'text-font': ['DIN Pro Bold', 'Arial Unicode MS Bold'],
+      'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
+      // Smaller and zoom-scaled — only visible when zoomed close
       'text-size': [
-        'interpolate', ['linear'], ['get', 'amount'],
-        0,         11,
-        1000000,   13,
-        5000000,   16,
-        10000000,  18,
+        'interpolate', ['linear'], ['zoom'],
+        12, 0,           // hidden at far zoom (let buildings speak)
+        13.5, 9,         // tiny at medium
+        15, 11,
+        17, 13,
       ],
-      'text-offset': [0, -2.6],
+      'text-offset': [0, -1.6],
       'text-anchor': 'bottom',
-      'text-allow-overlap': true,
-      'text-letter-spacing': 0.04,
-      'text-max-width': 10,
+      'text-allow-overlap': false,        // labels can yield to each other
+      'text-ignore-placement': false,
+      'text-letter-spacing': 0.02,
+      'text-max-width': 8,
+      'text-padding': 8,                  // breathing room
     },
     paint: {
       'text-color': '#ffffff',
       'text-halo-color': '#05070a',
-      'text-halo-width': 2.4,
-      'text-halo-blur': 0.5,
+      'text-halo-width': 1.8,
+      'text-halo-blur': 0.4,
     }
   });
 
@@ -1432,7 +1457,7 @@ const hoverTooltip = new mapboxgl.Popup({
 //  - State machine with timers we can clear on pause/skip
 //  - Each chapter: flyTo camera + show callout + auto-advance
 // ============================================================
-const CHAPTERS = [{"id": "intro", "eyebrow": "INOVUES \u00b7 MANHATTAN PORTFOLIO", "title": "7 Active Deals", "subtitle": "From a single-window mockup on Madison Avenue to a 211,000 ft\u00b2 trophy on Park \u2014 every active opportunity in Manhattan.", "stats": [["DEALS", "7"], ["GLASS", "315K ft\u00b2"], ["PIPELINE", "$11.3M"]], "camera": {"center": [-73.978, 40.76], "zoom": 13.5, "pitch": 55, "bearing": -15, "duration": 4500}}, {"id": "NY Presbyterian-Luxwall", "eyebrow": "CHAPTER 01 \u00b7 UES", "title": "NY Presbyterian-Luxwall", "subtitle": "Mid-size opportunity. 2,500 ft\u00b2 scope. Typical INOVUES deployment.", "stats": [["GLASS", "2,500 ft\u00b2"], ["VALUE", "$140K"], ["STAGE", "4 / 8"]], "tier": "mid", "camera": {"center": [-73.95448, 40.764353], "zoom": 16.0, "pitch": 65, "bearing": 323, "duration": 5000}}, {"id": "1700 Broadway, NYC", "eyebrow": "CHAPTER 02 \u00b7 MIDTOWN WEST", "title": "1700 Broadway", "subtitle": "Major project. 50,000 ft\u00b2 of glass area, $2.0M in retrofit revenue.", "stats": [["GLASS", "50,000 ft\u00b2"], ["VALUE", "$2.0M"], ["STAGE", "1 / 8"]], "tier": "major", "camera": {"center": [-73.982374, 40.763462], "zoom": 16.0, "pitch": 65, "bearing": -14, "duration": 5000}}, {"id": "437 Madison Avenue (Mockup)", "eyebrow": "CHAPTER 03 \u00b7 MIDTOWN", "title": "437 Madison Avenue", "subtitle": "Early-stage lead. 53 ft\u00b2 scope under qualification.", "stats": [["GLASS", "53 ft\u00b2"], ["VALUE", "$9K"], ["STAGE", "4 / 8"]], "tier": "small", "camera": {"center": [-73.975372, 40.757478], "zoom": 16.2, "pitch": 65, "bearing": 9, "duration": 5000}}, {"id": "437 Madison Avenue, NYC", "eyebrow": "CHAPTER 04 \u00b7 MIDTOWN", "title": "437 Madison Avenue", "subtitle": "Mid-size opportunity. 40,000 ft\u00b2 scope. Typical INOVUES deployment.", "stats": [["GLASS", "40,000 ft\u00b2"], ["VALUE", "$250K"], ["STAGE", "1 / 8"]], "tier": "mid", "camera": {"center": [-73.975372, 40.757478], "zoom": 16.0, "pitch": 65, "bearing": 32, "duration": 5000}}, {"id": "277 Park Ave NYC", "eyebrow": "CHAPTER 05 \u00b7 MIDTOWN EAST", "title": "277 Park Ave NYC", "subtitle": "Flagship trophy asset. 211,050 ft\u00b2 of glass \u2014 among the largest opportunities in the NYC pipeline.", "stats": [["GLASS", "211,050 ft\u00b2"], ["VALUE", "$8.4M"], ["STAGE", "3 / 8"]], "tier": "flagship", "camera": {"center": [-73.9742, 40.7568], "zoom": 16.4, "pitch": 65, "bearing": 55, "duration": 5000}}, {"id": "445 Fifth Avenue", "eyebrow": "CHAPTER 06 \u00b7 MIDTOWN", "title": "445 Fifth Avenue", "subtitle": "Mid-size opportunity. 11,872 ft\u00b2 scope. Typical INOVUES deployment.", "stats": [["GLASS", "11,872 ft\u00b2"], ["VALUE", "$481K"], ["STAGE", "4 / 8"]], "tier": "mid", "camera": {"center": [-73.979784, 40.754493], "zoom": 16.0, "pitch": 65, "bearing": 78, "duration": 5000}}, {"id": "605 Third Avenue Mockup", "eyebrow": "CHAPTER 07 \u00b7 MIDTOWN", "title": "605 Third Avenue Mockup", "subtitle": "Early-stage lead. 100 ft\u00b2 scope under qualification.", "stats": [["GLASS", "100 ft\u00b2"], ["VALUE", "$5K"], ["STAGE", "4 / 8"]], "tier": "small", "camera": {"center": [-73.975162, 40.74902], "zoom": 16.2, "pitch": 65, "bearing": 101, "duration": 5000}}, {"id": "outro", "eyebrow": "MANHATTAN PIPELINE", "title": "$11.3M in motion", "subtitle": "7 deals, 316K square feet of Manhattan glass. Every project on the path to compliance and ESG capture.", "stats": [["DEALS", "7"], ["GLASS", "315K ft\u00b2"], ["PIPELINE", "$11.3M"]], "camera": {"center": [-73.978, 40.76], "zoom": 12.5, "pitch": 50, "bearing": 0, "duration": 5500}}];
+const CHAPTERS = [{"id": "intro", "eyebrow": "INOVUES \u00b7 MANHATTAN PORTFOLIO", "title": "7 Active Deals", "subtitle": "From a single-window mockup on Madison Avenue to a 211,000 ft\u00b2 trophy on Park \u2014 every active opportunity in Manhattan.", "stats": [["DEALS", "7"], ["GLASS", "315K ft\u00b2"], ["PIPELINE", "$11.3M"]], "camera": {"center": [-73.978, 40.76], "zoom": 13.5, "pitch": 55, "bearing": -15, "duration": 4500}}, {"id": "NY Presbyterian-Luxwall", "eyebrow": "CHAPTER 01 \u00b7 UES", "title": "NY Presbyterian-Luxwall", "subtitle": "Mid-size opportunity. 2,500 ft\u00b2 scope. Typical INOVUES deployment.", "stats": [["GLASS", "2,500 ft\u00b2"], ["VALUE", "$140K"], ["STAGE", "4 / 8"]], "tier": "mid", "camera": {"center": [-73.95448, 40.764353], "zoom": 15.5, "pitch": 45, "bearing": 323, "duration": 5000}}, {"id": "1700 Broadway, NYC", "eyebrow": "CHAPTER 02 \u00b7 MIDTOWN WEST", "title": "1700 Broadway", "subtitle": "Major project. 50,000 ft\u00b2 of glass area, $2.0M in retrofit revenue.", "stats": [["GLASS", "50,000 ft\u00b2"], ["VALUE", "$2.0M"], ["STAGE", "1 / 8"]], "tier": "major", "camera": {"center": [-73.982374, 40.763462], "zoom": 15.5, "pitch": 45, "bearing": -14, "duration": 5000}}, {"id": "437 Madison Avenue (Mockup)", "eyebrow": "CHAPTER 03 \u00b7 MIDTOWN", "title": "437 Madison Avenue", "subtitle": "Early-stage lead. 53 ft\u00b2 scope under qualification.", "stats": [["GLASS", "53 ft\u00b2"], ["VALUE", "$9K"], ["STAGE", "4 / 8"]], "tier": "small", "camera": {"center": [-73.975372, 40.757478], "zoom": 15.5, "pitch": 45, "bearing": 9, "duration": 5000}}, {"id": "437 Madison Avenue, NYC", "eyebrow": "CHAPTER 04 \u00b7 MIDTOWN", "title": "437 Madison Avenue", "subtitle": "Mid-size opportunity. 40,000 ft\u00b2 scope. Typical INOVUES deployment.", "stats": [["GLASS", "40,000 ft\u00b2"], ["VALUE", "$250K"], ["STAGE", "1 / 8"]], "tier": "mid", "camera": {"center": [-73.975372, 40.757478], "zoom": 15.5, "pitch": 45, "bearing": 32, "duration": 5000}}, {"id": "277 Park Ave NYC", "eyebrow": "CHAPTER 05 \u00b7 MIDTOWN EAST", "title": "277 Park Ave NYC", "subtitle": "Flagship trophy asset. 211,050 ft\u00b2 of glass \u2014 among the largest opportunities in the NYC pipeline.", "stats": [["GLASS", "211,050 ft\u00b2"], ["VALUE", "$8.4M"], ["STAGE", "3 / 8"]], "tier": "flagship", "camera": {"center": [-73.9742, 40.7568], "zoom": 15.5, "pitch": 45, "bearing": 55, "duration": 5000}}, {"id": "445 Fifth Avenue", "eyebrow": "CHAPTER 06 \u00b7 MIDTOWN", "title": "445 Fifth Avenue", "subtitle": "Mid-size opportunity. 11,872 ft\u00b2 scope. Typical INOVUES deployment.", "stats": [["GLASS", "11,872 ft\u00b2"], ["VALUE", "$481K"], ["STAGE", "4 / 8"]], "tier": "mid", "camera": {"center": [-73.979784, 40.754493], "zoom": 15.5, "pitch": 45, "bearing": 78, "duration": 5000}}, {"id": "605 Third Avenue Mockup", "eyebrow": "CHAPTER 07 \u00b7 MIDTOWN", "title": "605 Third Avenue Mockup", "subtitle": "Early-stage lead. 100 ft\u00b2 scope under qualification.", "stats": [["GLASS", "100 ft\u00b2"], ["VALUE", "$5K"], ["STAGE", "4 / 8"]], "tier": "small", "camera": {"center": [-73.975162, 40.74902], "zoom": 15.5, "pitch": 45, "bearing": 101, "duration": 5000}}, {"id": "outro", "eyebrow": "MANHATTAN PIPELINE", "title": "$11.3M in motion", "subtitle": "7 deals, 316K square feet of Manhattan glass. Every project on the path to compliance and ESG capture.", "stats": [["DEALS", "7"], ["GLASS", "315K ft\u00b2"], ["PIPELINE", "$11.3M"]], "camera": {"center": [-73.978, 40.76], "zoom": 12.5, "pitch": 50, "bearing": 0, "duration": 5500}}];
 
 let flightIdx = 0;
 let flightRunning = false;
