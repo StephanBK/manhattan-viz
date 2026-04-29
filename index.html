@@ -419,19 +419,6 @@ html, body {
 .deal-amt.flagship { color: var(--accent-2); }
 .deal-amt.major    { color: var(--accent); }
 
-.mockup-badge {
-  display: inline-block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ok);
-  border: 1px solid var(--ok);
-  padding: 1px 5px;
-  border-radius: 2px;
-  margin-left: 6px;
-  vertical-align: middle;
-}
 
 /* ============================
    POPUP — Annual report style
@@ -581,9 +568,6 @@ html, body {
   text-transform: uppercase;
   color: var(--text-muted);
 }
-.popup-footer .has-mockup {
-  color: var(--ok);
-}
 
 /* ============================
    BOTTOM-LEFT FOOTER
@@ -659,7 +643,7 @@ html, body {
     <div class="intro-eyebrow">INOVUES · PORTFOLIO MAP · 2026</div>
     <h1 class="intro-hero">Manhattan,<br>built <em>13&nbsp;ways</em>.</h1>
     <p class="intro-sub">
-      Every active deal in the New York metro — from LIC mockups to a 211,000&nbsp;ft²
+      Every active deal in the New York metro — from small lead in Astoria to a 211,000&nbsp;ft²
       flagship on Park Avenue. Sized by deal value, colored by pipeline stage,
       annotated with the work already in motion.
     </p>
@@ -677,8 +661,8 @@ html, body {
         <div class="stat-value">$14.6<sup>M</sup></div>
       </div>
       <div class="stat-block">
-        <div class="stat-label">Mockups</div>
-        <div class="stat-value">2</div>
+        <div class="stat-label">Largest Deal</div>
+        <div class="stat-value">$8.4<sup>M</sup></div>
       </div>
     </div>
     <button class="intro-cta" onclick="document.getElementById('intro').classList.add('hidden')">
@@ -779,26 +763,16 @@ const STAGE_TOTAL = 8;
 
 // ============================================================
 //  MAP INITIALIZATION
-//  - Mapbox Standard: built-in photoreal 3D buildings + landmarks
-//  - Cinematic pitch matching viz-steel
+//  Dark style with uniform extruded city buildings (viz-steel aesthetic)
 // ============================================================
 const map = new mapboxgl.Map({
   container: 'map',
-  style: 'mapbox://styles/mapbox/standard',
-  center: [-73.9764, 40.7589],   // Midtown Manhattan
+  style: 'mapbox://styles/mapbox/dark-v11',
+  center: [-73.9764, 40.7589],
   zoom: 12.8,
   pitch: 60,
   bearing: -17,
   antialias: true,
-  config: {
-    basemap: {
-      lightPreset: 'dusk',          // dusk gives the rich teal/orange that matches our brand
-      showPlaceLabels: true,
-      showRoadLabels: false,         // less clutter
-      showPointOfInterestLabels: false,
-      showTransitLabels: false,
-    }
-  }
 });
 
 map.addControl(new mapboxgl.NavigationControl({ visualizePitch: false }), 'bottom-right');
@@ -826,31 +800,50 @@ map.on('load', async () => {
     deals = INLINE_DEALS;
   }
 
+  // ============================================================
+  //  CITY BUILDINGS — uniform extrusion, low opacity, viz-steel style
+  //  Uses Mapbox's built-in vector building footprints
+  // ============================================================
+  const layers = map.getStyle().layers;
+  const labelLayerId = layers.find(l => l.type === 'symbol' && l.layout && l.layout['text-field'])?.id;
+
+  map.addLayer({
+    id: 'city-buildings',
+    type: 'fill-extrusion',
+    source: 'composite',
+    'source-layer': 'building',
+    filter: ['==', 'extrude', 'true'],
+    minzoom: 11,
+    paint: {
+      'fill-extrusion-color': '#1a1f2a',
+      'fill-extrusion-height': ['get', 'height'],
+      'fill-extrusion-base': ['get', 'min_height'],
+      'fill-extrusion-opacity': 0.85,
+      'fill-extrusion-vertical-gradient': true,
+    }
+  }, labelLayerId);
+
   map.addSource('deals', { type: 'geojson', data: deals });
 
   // ============================================================
-  //  HUBSPOT DEAL LAYERS — built to POP against the 3D city
-  //  Layer order (bottom → top):
-  //    1. Outer glow halo (large, blurred, very visible)
-  //    2. Inner glow ring (mid, less blurred)
-  //    3. Core dot (saturated, opaque)
-  //    4. Stage indicator ring (white outline thickness = stage progression)
-  //    5. Name + amount label (always on, never collides)
+  //  HUBSPOT DEAL MARKERS — extruded pillars + glow + labels
+  //  These are *the* highlighted buildings — bright color,
+  //  taller than surroundings, impossible to miss
   // ============================================================
 
-  // 1. OUTER GLOW — big soft halo so deals are unmissable
+  // GROUND GLOW — soft circle on the ground beneath the pillar
   map.addLayer({
-    id: 'deals-halo-outer',
+    id: 'deals-ground-glow',
     type: 'circle',
     source: 'deals',
     paint: {
       'circle-radius': [
-        'interpolate', ['linear'], ['get', 'amount'],
-        0,         24,
-        100000,    36,
-        1000000,   56,
-        5000000,   88,
-        10000000, 110,
+        'interpolate', ['linear'], ['zoom'],
+        10, 8,
+        13, ['interpolate', ['linear'], ['get', 'amount'],
+              0, 14, 100000, 22, 1000000, 36, 5000000, 60, 10000000, 80],
+        16, ['interpolate', ['linear'], ['get', 'amount'],
+              0, 28, 100000, 44, 1000000, 70, 5000000, 120, 10000000, 160],
       ],
       'circle-color': [
         'match', ['get', 'tier'],
@@ -859,65 +852,64 @@ map.on('load', async () => {
         'mid',      TIER_COLORS.mid,
         TIER_COLORS.small,
       ],
-      'circle-opacity': 0.18,
-      'circle-blur': 1.2,
+      'circle-opacity': 0.22,
+      'circle-blur': 0.9,
+      'circle-pitch-alignment': 'map',
     }
   });
 
-  // 2. INNER GLOW — sharper edge for definition
+  // EXTRUDED PILLAR — a glowing colored building rising from the ground
+  // We'll dynamically create a buffered polygon source for this
+  const pillarFeatures = deals.features.map(f => {
+    // Tiny circle polygon ~8m radius around each deal point
+    const [lng, lat] = f.geometry.coordinates;
+    const r = 0.00012; // ~13m at NYC latitude
+    const sides = 12;
+    const ring = [];
+    for (let i = 0; i <= sides; i++) {
+      const a = (i / sides) * Math.PI * 2;
+      ring.push([lng + Math.cos(a) * r, lat + Math.sin(a) * r * 1.3]);
+    }
+    return {
+      type: 'Feature',
+      geometry: { type: 'Polygon', coordinates: [ring] },
+      properties: f.properties,
+    };
+  });
+
+  map.addSource('deal-pillars', {
+    type: 'geojson',
+    data: { type: 'FeatureCollection', features: pillarFeatures }
+  });
+
   map.addLayer({
-    id: 'deals-halo-inner',
-    type: 'circle',
-    source: 'deals',
+    id: 'deals-pillar',
+    type: 'fill-extrusion',
+    source: 'deal-pillars',
     paint: {
-      'circle-radius': [
-        'interpolate', ['linear'], ['get', 'amount'],
-        0,         14,
-        100000,    20,
-        1000000,   32,
-        5000000,   54,
-        10000000,  68,
-      ],
-      'circle-color': [
+      'fill-extrusion-color': [
         'match', ['get', 'tier'],
         'flagship', TIER_COLORS.flagship,
         'major',    TIER_COLORS.major,
         'mid',      TIER_COLORS.mid,
         TIER_COLORS.small,
       ],
-      'circle-opacity': 0.32,
-      'circle-blur': 0.6,
-    }
-  });
-
-  // 3. CORE DOT — sized by deal amount, fully saturated
-  map.addLayer({
-    id: 'deals-dot',
-    type: 'circle',
-    source: 'deals',
-    paint: {
-      'circle-radius': [
+      // Pillar height scales with deal amount
+      'fill-extrusion-height': [
         'interpolate', ['linear'], ['get', 'amount'],
-        0,         6,
-        100000,    9,
-        1000000,   14,
-        5000000,   22,
-        10000000,  28,
+        0,         60,
+        100000,    100,
+        1000000,   200,
+        5000000,   380,
+        10000000,  480,
       ],
-      'circle-color': [
-        'match', ['get', 'tier'],
-        'flagship', TIER_COLORS.flagship,
-        'major',    TIER_COLORS.major,
-        'mid',      TIER_COLORS.mid,
-        TIER_COLORS.small,
-      ],
-      'circle-stroke-width': 2.5,
-      'circle-stroke-color': '#ffffff',
-      'circle-opacity': 1,
+      'fill-extrusion-base': 0,
+      'fill-extrusion-opacity': 0.92,
+      'fill-extrusion-vertical-gradient': true,
     }
   });
 
-  // 4. NAME LABEL — always on, every deal
+  // NAME LABEL — bold, always on, white with halo
   map.addLayer({
     id: 'deals-label',
     type: 'symbol',
@@ -932,14 +924,9 @@ map.on('load', async () => {
         5000000,   16,
         10000000,  18,
       ],
-      'text-offset': [
-        'interpolate', ['linear'], ['get', 'amount'],
-        0,         ['literal', [0, 1.5]],
-        1000000,   ['literal', [0, 2.0]],
-        5000000,   ['literal', [0, 2.6]],
-      ],
-      'text-anchor': 'top',
-      'text-allow-overlap': false,
+      'text-offset': [0, -2.4],
+      'text-anchor': 'bottom',
+      'text-allow-overlap': true,
       'text-ignore-placement': false,
       'text-letter-spacing': 0.04,
       'text-max-width': 10,
@@ -947,12 +934,12 @@ map.on('load', async () => {
     paint: {
       'text-color': '#ffffff',
       'text-halo-color': '#05070a',
-      'text-halo-width': 2,
+      'text-halo-width': 2.2,
       'text-halo-blur': 0.5,
     }
   });
 
-  // 5. AMOUNT LABEL — below the name, monospace, color-coded
+  // AMOUNT + STAGE — colored monospace, below name
   map.addLayer({
     id: 'deals-amount',
     type: 'symbol',
@@ -978,14 +965,9 @@ map.on('load', async () => {
         1000000,   11,
         5000000,   13,
       ],
-      'text-offset': [
-        'interpolate', ['linear'], ['get', 'amount'],
-        0,         ['literal', [0, 2.8]],
-        1000000,   ['literal', [0, 3.4]],
-        5000000,   ['literal', [0, 4.2]],
-      ],
-      'text-anchor': 'top',
-      'text-allow-overlap': false,
+      'text-offset': [0, -1.3],
+      'text-anchor': 'bottom',
+      'text-allow-overlap': true,
       'text-letter-spacing': 0.12,
     },
     paint: {
@@ -1002,16 +984,35 @@ map.on('load', async () => {
     }
   });
 
-  // ============================================================
-  //  POPUP ON CLICK
-  // ============================================================
-  map.on('click', 'deals-dot', (e) => {
-    const f = e.features[0];
-    showPopup(f);
+  // INVISIBLE click-target circle (the pillar is hard to click on small zoom)
+  map.addLayer({
+    id: 'deals-clickable',
+    type: 'circle',
+    source: 'deals',
+    paint: {
+      'circle-radius': 30,
+      'circle-opacity': 0,
+    }
   });
 
-  map.on('mouseenter', 'deals-dot', () => map.getCanvas().style.cursor = 'pointer');
-  map.on('mouseleave', 'deals-dot', () => map.getCanvas().style.cursor = '');
+  // ============================================================
+  //  POPUP ON CLICK — works on pillar OR invisible click target
+  // ============================================================
+  ['deals-clickable', 'deals-pillar'].forEach(layerId => {
+    map.on('click', layerId, (e) => {
+      const f = e.features[0];
+      // Reconstruct a point feature from properties (pillar features are polygons)
+      if (f.geometry.type === 'Polygon') {
+        // Find the matching point feature
+        const point = deals.features.find(d => d.properties.full_name === f.properties.full_name);
+        if (point) showPopup(point);
+      } else {
+        showPopup(f);
+      }
+    });
+    map.on('mouseenter', layerId, () => map.getCanvas().style.cursor = 'pointer');
+    map.on('mouseleave', layerId, () => map.getCanvas().style.cursor = '');
+  });
 
   // ============================================================
   //  BUILD SIDE PANEL DEAL LIST
@@ -1033,7 +1034,6 @@ function showPopup(feature) {
   const tierClass = p.tier;
   const stageIdx = +p.stage_idx;
   const advanced = stageIdx >= 5;
-  const isMockup = p.is_mockup === 'true' || p.is_mockup === true;
 
   // Build stage bar segments
   let segs = '';
@@ -1052,7 +1052,7 @@ function showPopup(feature) {
           <span>${p.area.toUpperCase()}</span>
           <span>${p.tier.toUpperCase()}</span>
         </div>
-        <h3 class="popup-name">${p.name}${isMockup ? '<span class="mockup-badge">Mockup</span>' : ''}</h3>
+        <h3 class="popup-name">${p.name}</h3>
         <div class="popup-area">${p.address}</div>
       </div>
       <div class="popup-hero">
@@ -1076,7 +1076,7 @@ function showPopup(feature) {
       <div class="popup-context">${context}</div>
       <div class="popup-footer">
         <span>Created ${formatShortDate(p.created)}</span>
-        <span class="${isMockup ? 'has-mockup' : ''}">${isMockup ? '✓ Mockup Built' : 'Target ' + formatShortDate(p.close)}</span>
+        <span>Target ${formatShortDate(p.close)}</span>
       </div>
     </div>
   `;
@@ -1098,13 +1098,9 @@ function showPopup(feature) {
 //  (this is where the "annual report dense" feel comes from)
 // ============================================================
 function buildContext(p) {
-  const isMockup = p.is_mockup === 'true' || p.is_mockup === true;
   const sf = +p.sf;
   const amt = +p.amount;
 
-  if (isMockup) {
-    return `<strong>Proof-of-concept install.</strong> Small-scale mockup to demonstrate INOVUES technology before the parent project commits. Mockups historically convert to full retrofit at 60–80% rate.`;
-  }
   if (p.tier === 'flagship') {
     return `<strong>Flagship trophy asset.</strong> ${formatMoney(amt)} across ${(sf/1000).toFixed(0)}K ft² of glass — among the largest opportunities in the NYC pipeline. Multi-year deployment, priority sales focus.`;
   }
@@ -1127,13 +1123,12 @@ function buildDealList(features) {
 
   list.innerHTML = sorted.map(f => {
     const p = f.properties;
-    const isMockup = p.is_mockup === 'true' || p.is_mockup === true;
     const amt = formatMoney(+p.amount);
     return `
       <div class="deal-row" data-deal="${p.full_name}" data-lng="${f.geometry.coordinates[0]}" data-lat="${f.geometry.coordinates[1]}">
         <div class="deal-tier-dot ${p.tier}"></div>
         <div class="deal-info">
-          <div class="deal-name">${p.name}${isMockup ? '<span class="mockup-badge">Mockup</span>' : ''}</div>
+          <div class="deal-name">${p.name}</div>
           <div class="deal-area">${p.area} · Stage ${p.stage_idx}/${STAGE_TOTAL}</div>
         </div>
         <div class="deal-amt ${p.tier}">${amt}</div>
