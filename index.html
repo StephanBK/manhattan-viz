@@ -858,24 +858,23 @@ html, body {
   <div class="intro-inner">
     <button class="intro-close" onclick="document.getElementById('intro').classList.add('hidden')" aria-label="Close">×</button>
     <div class="intro-eyebrow">INOVUES · PORTFOLIO MAP · 2026</div>
-    <h1 class="intro-hero">Manhattan,<br>built <em>12&nbsp;ways</em>.</h1>
+    <h1 class="intro-hero">Manhattan,<br>built <em>7&nbsp;ways</em>.</h1>
     <p class="intro-sub">
-      Every active deal in the New York metro — from small lead in Astoria to a 211,000&nbsp;ft²
-      flagship on Park Avenue. Sized by deal value, colored by pipeline stage,
+      Every active deal in Manhattan — from a single-window mockup on Madison Avenue to a 211,000&nbsp;ft² flagship on Park. Sized by deal value, colored by pipeline stage,
       annotated with the work already in motion.
     </p>
     <div class="intro-stats">
       <div class="stat-block">
         <div class="stat-label">Active Deals</div>
-        <div class="stat-value">12</div>
+        <div class="stat-value">7</div>
       </div>
       <div class="stat-block">
         <div class="stat-label">Total Glass</div>
-        <div class="stat-value">391<sup>K&nbsp;ft²</sup></div>
+        <div class="stat-value">316<sup>K&nbsp;ft²</sup></div>
       </div>
       <div class="stat-block">
         <div class="stat-label">Pipeline</div>
-        <div class="stat-value">$13.3<sup>M</sup></div>
+        <div class="stat-value">$11.3<sup>M</sup></div>
       </div>
       <div class="stat-block">
         <div class="stat-label">Largest Deal</div>
@@ -904,16 +903,16 @@ html, body {
 <div class="portfolio-panel">
   <div class="panel-header">
     <div class="panel-eyebrow">CHAPTER 01 · ACTIVE PIPELINE</div>
-    <h2 class="panel-title">12 deals across the metro</h2>
+    <h2 class="panel-title">7 deals across Manhattan</h2>
   </div>
   <div class="panel-summary">
     <div class="summary-cell">
       <div class="sl">Total Glass</div>
-      <div class="sv">391<sup>K ft²</sup></div>
+      <div class="sv">316<sup>K ft²</sup></div>
     </div>
     <div class="summary-cell">
       <div class="sl">Pipeline</div>
-      <div class="sv">$13.3<sup>M</sup></div>
+      <div class="sv">$11.3<sup>M</sup></div>
     </div>
   </div>
   <div class="stage-bar-wrap">
@@ -1029,7 +1028,7 @@ map.on('load', async () => {
 
   // Inline deal data (embedded so file:// protocol works without a server)
   // For production updates, edit deals.geojson and re-run the inline injection
-  const INLINE_DEALS = {"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.975162, 40.74902]}, "properties": {"name": "605 Third Avenue Mockup", "full_name": "605 Third Avenue Mockup", "area": "Midtown", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 100, "amount": 5000.0, "tier": "small", "is_mockup": true, "created": "3/5/26 17:42", "close": "8/14/26 17:41", "address": "605 Third Avenue, New York, New York 10158, United States"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.979784, 40.754493]}, "properties": {"name": "445 Fifth Avenue", "full_name": "445 Fifth Avenue", "area": "Midtown", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 11872, "amount": 481425.32, "tier": "mid", "is_mockup": false, "created": "2/5/26 15:06", "close": "12/31/27 11:19", "address": "445 Fifth Avenue, New York, New York 10173, United States"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.926412, 40.765173]}, "properties": {"name": "24 Crecent St.", "full_name": "24 Crecent St.", "area": "LIC", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 423, "amount": 19958.15, "tier": "small", "is_mockup": false, "created": "2/5/26 11:16", "close": "6/5/26 11:15", "address": "Crescent Street, Astoria, New York 11106, United States"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-72.923434, 41.307101]}, "properties": {"name": "200 Orange Street, New Haven", "full_name": "200 Orange Street, New Haven", "area": "New Haven", "stage": "Potential Building/Lead", "stage_idx": 1, "stage_total": 8, "sf": 1200, "amount": 50000.0, "tier": "small", "is_mockup": false, "created": "1/21/26 15:03", "close": "7/23/26 15:03", "address": "200 Orange Street, New Haven, Connecticut 06510, United States"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.95448, 40.764353]}, "properties": {"name": "NY Presbyterian-Luxwall", "full_name": "NY Presbyterian-Luxwall", "area": "UES", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 2500, "amount": 140000.0, "tier": "mid", "is_mockup": false, "created": "12/2/25 11:49", "close": "9/30/26 11:21", "address": "525 East 68th Street, New York, New York 10065, United States"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.975372, 40.757478]}, "properties": {"name": "437 Madison Avenue", "full_name": "437 Madison Avenue (Mockup)", "area": "Midtown", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 53, "amount": 8568.53, "tier": "small", "is_mockup": true, "created": "9/3/25 23:03", "close": "9/30/26 11:23", "address": "437 Madison Avenue, New York, New York 10022, United States"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.975372, 40.757478]}, "properties": {"name": "437 Madison Avenue", "full_name": "437 Madison Avenue, NYC", "area": "Midtown", "stage": "Potential Building/Lead", "stage_idx": 1, "stage_total": 8, "sf": 40000, "amount": 250000.0, "tier": "mid", "is_mockup": false, "created": "8/27/25 15:08", "close": "2/20/25 15:07", "address": "437 Madison Avenue, New York, New York 10022, United States"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.9742, 40.7568]}, "properties": {"name": "277 Park Ave NYC", "full_name": "277 Park Ave NYC", "area": "Midtown East", "stage": "Filled Initial Survey Form", "stage_idx": 3, "stage_total": 8, "sf": 211050, "amount": 8442000.0, "tier": "flagship", "is_mockup": false, "created": "8/22/25 16:41", "close": "3/31/27 12:17", "address": "277 Park Avenue, Manhattan, NY 10172 (corrected)"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.982374, 40.763462]}, "properties": {"name": "1700 Broadway", "full_name": "1700 Broadway, NYC", "area": "Midtown West", "stage": "Potential Building/Lead", "stage_idx": 1, "stage_total": 8, "sf": 50000, "amount": 2000000.0, "tier": "major", "is_mockup": false, "created": "8/18/25 8:34", "close": "8/21/26 15:05", "address": "1700 Broadway, New York, New York 10019, United States"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-74.171739, 40.736755]}, "properties": {"name": "745 Broad St., Newark, NJ", "full_name": "745 Broad St., Newark, NJ", "area": "Newark", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 51423, "amount": 1380050.89, "tier": "major", "is_mockup": false, "created": "7/16/25 16:39", "close": "12/31/26 11:24", "address": "745 Broad Street, Newark, New Jersey 07102, United States"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.935246, 40.709036]}, "properties": {"name": "315 Meserole St, Brooklyn", "full_name": "315 Meserole St, Brooklyn, NY", "area": "Bushwick", "stage": "RFI for a Building", "stage_idx": 2, "stage_total": 8, "sf": 20000, "amount": 500000.0, "tier": "mid", "is_mockup": false, "created": "6/2/25 22:47", "close": "6/30/27 12:19", "address": "315 Meserole Street, Brooklyn, New York 11206, United States"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.920257, 40.836246]}, "properties": {"name": "Morrisania DTC Center", "full_name": "Morrisania DTC Center", "area": "Bronx", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 2503, "amount": 65234.77, "tier": "small", "is_mockup": false, "created": "6/1/25 16:15", "close": "12/31/27 12:21", "address": "1225 Gerard Avenue, Bronx, New York 10452, United States"}}]};
+  const INLINE_DEALS = {"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.975162, 40.74902]}, "properties": {"name": "605 Third Avenue Mockup", "full_name": "605 Third Avenue Mockup", "area": "Midtown", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 100, "amount": 5000.0, "tier": "small", "is_mockup": true, "created": "3/5/26 17:42", "close": "8/14/26 17:41", "address": "605 Third Avenue, New York, New York 10158, United States"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.979784, 40.754493]}, "properties": {"name": "445 Fifth Avenue", "full_name": "445 Fifth Avenue", "area": "Midtown", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 11872, "amount": 481425.32, "tier": "mid", "is_mockup": false, "created": "2/5/26 15:06", "close": "12/31/27 11:19", "address": "445 Fifth Avenue, New York, New York 10173, United States"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.95448, 40.764353]}, "properties": {"name": "NY Presbyterian-Luxwall", "full_name": "NY Presbyterian-Luxwall", "area": "UES", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 2500, "amount": 140000.0, "tier": "mid", "is_mockup": false, "created": "12/2/25 11:49", "close": "9/30/26 11:21", "address": "525 East 68th Street, New York, New York 10065, United States"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.975372, 40.757478]}, "properties": {"name": "437 Madison Avenue", "full_name": "437 Madison Avenue (Mockup)", "area": "Midtown", "stage": "RFQ / Qualified to buy", "stage_idx": 4, "stage_total": 8, "sf": 53, "amount": 8568.53, "tier": "small", "is_mockup": true, "created": "9/3/25 23:03", "close": "9/30/26 11:23", "address": "437 Madison Avenue, New York, New York 10022, United States"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.975372, 40.757478]}, "properties": {"name": "437 Madison Avenue", "full_name": "437 Madison Avenue, NYC", "area": "Midtown", "stage": "Potential Building/Lead", "stage_idx": 1, "stage_total": 8, "sf": 40000, "amount": 250000.0, "tier": "mid", "is_mockup": false, "created": "8/27/25 15:08", "close": "2/20/25 15:07", "address": "437 Madison Avenue, New York, New York 10022, United States"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.9742, 40.7568]}, "properties": {"name": "277 Park Ave NYC", "full_name": "277 Park Ave NYC", "area": "Midtown East", "stage": "Filled Initial Survey Form", "stage_idx": 3, "stage_total": 8, "sf": 211050, "amount": 8442000.0, "tier": "flagship", "is_mockup": false, "created": "8/22/25 16:41", "close": "3/31/27 12:17", "address": "277 Park Avenue, Manhattan, NY 10172 (corrected)"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.982374, 40.763462]}, "properties": {"name": "1700 Broadway", "full_name": "1700 Broadway, NYC", "area": "Midtown West", "stage": "Potential Building/Lead", "stage_idx": 1, "stage_total": 8, "sf": 50000, "amount": 2000000.0, "tier": "major", "is_mockup": false, "created": "8/18/25 8:34", "close": "8/21/26 15:05", "address": "1700 Broadway, New York, New York 10019, United States"}}]};
 
   // Try fetch first (in case deals.geojson is updated separately), fall back to inline
   let deals;
@@ -1076,41 +1075,41 @@ map.on('load', async () => {
   //  IDENTIFY DEAL BUILDINGS — find the actual building footprint
   //  under each deal coordinate, then highlight those specific ones
   // ============================================================
-  // Wait for tiles to load, then query the building layer at each deal point
+  // Building highlight — runs on every map idle event because Mapbox vector
+  // tile feature IDs change when new tiles load (zoom/pan). We have to re-apply
+  // setFeatureState every time tiles refresh, otherwise highlights flicker out.
   const dealBuildingMap = {}; // building feature ID -> deal properties
 
   function highlightDealBuildings() {
-    const buildingIds = [];
+    let found = 0;
     deals.features.forEach(deal => {
       const [lng, lat] = deal.geometry.coordinates;
-      // Project lng/lat to screen pixel for queryRenderedFeatures
       const pt = map.project([lng, lat]);
-      // Query a small area around the point to catch the building footprint
+      // Query a slightly larger box to be more forgiving with geocode imprecision
       const features = map.queryRenderedFeatures(
-        [[pt.x - 4, pt.y - 4], [pt.x + 4, pt.y + 4]],
+        [[pt.x - 6, pt.y - 6], [pt.x + 6, pt.y + 6]],
         { layers: ['city-buildings'] }
       );
       if (features.length > 0) {
-        // Pick the tallest building in the search box (best heuristic for skyscrapers)
+        // Pick tallest in box (skyscraper heuristic)
         const best = features.reduce((a, b) =>
           (b.properties.height || 0) > (a.properties.height || 0) ? b : a
         );
         const id = best.id;
         if (id !== undefined) {
           dealBuildingMap[id] = deal.properties;
-          buildingIds.push(id);
-          // Set feature state so we can paint by tier
           map.setFeatureState(
             { source: 'composite', sourceLayer: 'building', id: id },
             { tier: deal.properties.tier, isDeal: true }
           );
+          found++;
         }
       }
     });
-    return buildingIds.length;
+    return found;
   }
 
-  // Add the highlight layer — same building source, but painted by feature-state
+  // Add the highlight layer — paints buildings whose feature-state has tier set
   map.addLayer({
     id: 'highlighted-buildings',
     type: 'fill-extrusion',
@@ -1138,23 +1137,37 @@ map.on('load', async () => {
     }
   }, labelLayerId);
 
-  // Run the highlight pass when tiles are ready, and re-run on map move
-  // (because tiles may not be loaded yet on first attempt)
-  let highlightAttempts = 0;
-  function runHighlight() {
+  // ============================================================
+  //  KEEP HIGHLIGHTS STICKY ACROSS ZOOM/PAN
+  //  Mapbox vector tiles re-issue features with NEW IDs every time
+  //  tiles load. So we re-run on:
+  //    - 'idle' (fires when map stops moving + all tiles loaded)
+  //    - 'sourcedata' for composite source (new building tiles arrived)
+  //  We debounce so we don't thrash.
+  // ============================================================
+  let highlightTimer = null;
+  function scheduleHighlight() {
+    if (highlightTimer) clearTimeout(highlightTimer);
+    highlightTimer = setTimeout(() => {
+      highlightDealBuildings();
+    }, 80);
+  }
+
+  // Initial pass — retry up to 20× until tiles load enough buildings
+  let initialAttempts = 0;
+  function initialHighlight() {
     const found = highlightDealBuildings();
-    highlightAttempts++;
-    if (found < deals.features.length && highlightAttempts < 20) {
-      // Tiles still loading — try again shortly
-      setTimeout(runHighlight, 500);
-    } else {
-      console.log(`Highlighted ${found} of ${deals.features.length} deal buildings`);
+    initialAttempts++;
+    if (found < deals.features.length && initialAttempts < 20) {
+      setTimeout(initialHighlight, 400);
     }
   }
-  map.once('idle', runHighlight);
-  // Re-highlight on movement (in case new tiles load with new building IDs)
-  map.on('moveend', () => {
-    setTimeout(highlightDealBuildings, 100);
+  map.once('idle', initialHighlight);
+
+  // Sticky re-application
+  map.on('idle', scheduleHighlight);
+  map.on('sourcedata', (e) => {
+    if (e.sourceId === 'composite' && e.isSourceLoaded) scheduleHighlight();
   });
 
   // ============================================================
@@ -1469,7 +1482,7 @@ const hoverTooltip = new mapboxgl.Popup({
 //  - State machine with timers we can clear on pause/skip
 //  - Each chapter: flyTo camera + show callout + auto-advance
 // ============================================================
-const CHAPTERS = [{"id": "intro", "eyebrow": "INOVUES \u00b7 NYC PORTFOLIO", "title": "12 Active Deals", "subtitle": "From Park Avenue trophies to outer-borough mockups \u2014 every active opportunity in the metro pipeline.", "stats": [["DEALS", "12"], ["GLASS", "391K ft\u00b2"], ["PIPELINE", "$13.3M"]], "camera": {"center": [-73.97, 40.78], "zoom": 10.5, "pitch": 45, "bearing": -10, "duration": 4500}}, {"id": "200 Orange Street, New Haven", "eyebrow": "CHAPTER 01 \u00b7 NEW HAVEN", "title": "200 Orange Street, New Haven", "subtitle": "Early-stage lead. 1,200 ft\u00b2 scope under qualification.", "stats": [["GLASS", "1,200 ft\u00b2"], ["VALUE", "$50K"], ["STAGE", "1 / 8"]], "tier": "small", "camera": {"center": [-72.923434, 41.307101], "zoom": 15.0, "pitch": 65, "bearing": 317, "duration": 5000}}, {"id": "Morrisania DTC Center", "eyebrow": "CHAPTER 02 \u00b7 BRONX", "title": "Morrisania DTC Center", "subtitle": "Early-stage lead. 2,503 ft\u00b2 scope under qualification.", "stats": [["GLASS", "2,503 ft\u00b2"], ["VALUE", "$65K"], ["STAGE", "4 / 8"]], "tier": "small", "camera": {"center": [-73.920257, 40.836246], "zoom": 15.0, "pitch": 65, "bearing": -26, "duration": 5000}}, {"id": "NY Presbyterian-Luxwall", "eyebrow": "CHAPTER 03 \u00b7 UES", "title": "NY Presbyterian-Luxwall", "subtitle": "Mid-size opportunity. 2,500 ft\u00b2 scope. Typical INOVUES deployment.", "stats": [["GLASS", "2,500 ft\u00b2"], ["VALUE", "$140K"], ["STAGE", "4 / 8"]], "tier": "mid", "camera": {"center": [-73.95448, 40.764353], "zoom": 15.0, "pitch": 65, "bearing": -9, "duration": 5000}}, {"id": "1700 Broadway, NYC", "eyebrow": "CHAPTER 04 \u00b7 MIDTOWN WEST", "title": "1700 Broadway", "subtitle": "Major project. 50,000 ft\u00b2 of glass area, $2.0M in retrofit revenue.", "stats": [["GLASS", "50,000 ft\u00b2"], ["VALUE", "$2.0M"], ["STAGE", "1 / 8"]], "tier": "major", "camera": {"center": [-73.982374, 40.763462], "zoom": 15.5, "pitch": 65, "bearing": 8, "duration": 5000}}, {"id": "437 Madison Avenue (Mockup)", "eyebrow": "CHAPTER 05 \u00b7 MIDTOWN", "title": "437 Madison Avenue", "subtitle": "Early-stage lead. 53 ft\u00b2 scope under qualification.", "stats": [["GLASS", "53 ft\u00b2"], ["VALUE", "$9K"], ["STAGE", "4 / 8"]], "tier": "small", "camera": {"center": [-73.975372, 40.757478], "zoom": 15.0, "pitch": 65, "bearing": 25, "duration": 5000}}, {"id": "437 Madison Avenue, NYC", "eyebrow": "CHAPTER 06 \u00b7 MIDTOWN", "title": "437 Madison Avenue", "subtitle": "Mid-size opportunity. 40,000 ft\u00b2 scope. Typical INOVUES deployment.", "stats": [["GLASS", "40,000 ft\u00b2"], ["VALUE", "$250K"], ["STAGE", "1 / 8"]], "tier": "mid", "camera": {"center": [-73.975372, 40.757478], "zoom": 15.0, "pitch": 65, "bearing": 42, "duration": 5000}}, {"id": "277 Park Ave NYC", "eyebrow": "CHAPTER 07 \u00b7 MIDTOWN EAST", "title": "277 Park Ave NYC", "subtitle": "Flagship trophy asset. 211,050 ft\u00b2 of glass \u2014 among the largest opportunities in the NYC pipeline.", "stats": [["GLASS", "211,050 ft\u00b2"], ["VALUE", "$8.4M"], ["STAGE", "3 / 8"]], "tier": "flagship", "camera": {"center": [-73.9742, 40.7568], "zoom": 16.2, "pitch": 65, "bearing": 59, "duration": 5000}}, {"id": "445 Fifth Avenue", "eyebrow": "CHAPTER 08 \u00b7 MIDTOWN", "title": "445 Fifth Avenue", "subtitle": "Mid-size opportunity. 11,872 ft\u00b2 scope. Typical INOVUES deployment.", "stats": [["GLASS", "11,872 ft\u00b2"], ["VALUE", "$481K"], ["STAGE", "4 / 8"]], "tier": "mid", "camera": {"center": [-73.979784, 40.754493], "zoom": 15.0, "pitch": 65, "bearing": 76, "duration": 5000}}, {"id": "605 Third Avenue Mockup", "eyebrow": "CHAPTER 09 \u00b7 MIDTOWN", "title": "605 Third Avenue Mockup", "subtitle": "Early-stage lead. 100 ft\u00b2 scope under qualification.", "stats": [["GLASS", "100 ft\u00b2"], ["VALUE", "$5K"], ["STAGE", "4 / 8"]], "tier": "small", "camera": {"center": [-73.975162, 40.74902], "zoom": 15.0, "pitch": 65, "bearing": 93, "duration": 5000}}, {"id": "24 Crecent St.", "eyebrow": "CHAPTER 10 \u00b7 LIC", "title": "24 Crecent St.", "subtitle": "Early-stage lead. 423 ft\u00b2 scope under qualification.", "stats": [["GLASS", "423 ft\u00b2"], ["VALUE", "$20K"], ["STAGE", "4 / 8"]], "tier": "small", "camera": {"center": [-73.926412, 40.765173], "zoom": 15.0, "pitch": 65, "bearing": 110, "duration": 5000}}, {"id": "745 Broad St., Newark, NJ", "eyebrow": "CHAPTER 11 \u00b7 NEWARK", "title": "745 Broad St., Newark, NJ", "subtitle": "Major project. 51,423 ft\u00b2 of glass area, $1.4M in retrofit revenue.", "stats": [["GLASS", "51,423 ft\u00b2"], ["VALUE", "$1.4M"], ["STAGE", "4 / 8"]], "tier": "major", "camera": {"center": [-74.171739, 40.736755], "zoom": 15.5, "pitch": 65, "bearing": 127, "duration": 5000}}, {"id": "315 Meserole St, Brooklyn, NY", "eyebrow": "CHAPTER 12 \u00b7 BUSHWICK", "title": "315 Meserole St, Brooklyn", "subtitle": "Mid-size opportunity. 20,000 ft\u00b2 scope. Typical INOVUES deployment.", "stats": [["GLASS", "20,000 ft\u00b2"], ["VALUE", "$500K"], ["STAGE", "2 / 8"]], "tier": "mid", "camera": {"center": [-73.935246, 40.709036], "zoom": 15.0, "pitch": 65, "bearing": 144, "duration": 5000}}, {"id": "outro", "eyebrow": "PIPELINE TOTAL", "title": "$13.3M in motion", "subtitle": "12 deals, 391,000 square feet of glass, one technology. Every project on the path to compliance and ESG capture.", "stats": [["DEALS", "12"], ["GLASS", "391K ft\u00b2"], ["PIPELINE", "$13.3M"]], "camera": {"center": [-73.97, 40.76], "zoom": 11.2, "pitch": 40, "bearing": 0, "duration": 5500}}];
+const CHAPTERS = [{"id": "intro", "eyebrow": "INOVUES \u00b7 MANHATTAN PORTFOLIO", "title": "7 Active Deals", "subtitle": "From a single-window mockup on Madison Avenue to a 211,000 ft\u00b2 trophy on Park \u2014 every active opportunity in Manhattan.", "stats": [["DEALS", "7"], ["GLASS", "315K ft\u00b2"], ["PIPELINE", "$11.3M"]], "camera": {"center": [-73.978, 40.76], "zoom": 13.5, "pitch": 55, "bearing": -15, "duration": 4500}}, {"id": "NY Presbyterian-Luxwall", "eyebrow": "CHAPTER 01 \u00b7 UES", "title": "NY Presbyterian-Luxwall", "subtitle": "Mid-size opportunity. 2,500 ft\u00b2 scope. Typical INOVUES deployment.", "stats": [["GLASS", "2,500 ft\u00b2"], ["VALUE", "$140K"], ["STAGE", "4 / 8"]], "tier": "mid", "camera": {"center": [-73.95448, 40.764353], "zoom": 16.0, "pitch": 65, "bearing": 323, "duration": 5000}}, {"id": "1700 Broadway, NYC", "eyebrow": "CHAPTER 02 \u00b7 MIDTOWN WEST", "title": "1700 Broadway", "subtitle": "Major project. 50,000 ft\u00b2 of glass area, $2.0M in retrofit revenue.", "stats": [["GLASS", "50,000 ft\u00b2"], ["VALUE", "$2.0M"], ["STAGE", "1 / 8"]], "tier": "major", "camera": {"center": [-73.982374, 40.763462], "zoom": 16.0, "pitch": 65, "bearing": -14, "duration": 5000}}, {"id": "437 Madison Avenue (Mockup)", "eyebrow": "CHAPTER 03 \u00b7 MIDTOWN", "title": "437 Madison Avenue", "subtitle": "Early-stage lead. 53 ft\u00b2 scope under qualification.", "stats": [["GLASS", "53 ft\u00b2"], ["VALUE", "$9K"], ["STAGE", "4 / 8"]], "tier": "small", "camera": {"center": [-73.975372, 40.757478], "zoom": 16.2, "pitch": 65, "bearing": 9, "duration": 5000}}, {"id": "437 Madison Avenue, NYC", "eyebrow": "CHAPTER 04 \u00b7 MIDTOWN", "title": "437 Madison Avenue", "subtitle": "Mid-size opportunity. 40,000 ft\u00b2 scope. Typical INOVUES deployment.", "stats": [["GLASS", "40,000 ft\u00b2"], ["VALUE", "$250K"], ["STAGE", "1 / 8"]], "tier": "mid", "camera": {"center": [-73.975372, 40.757478], "zoom": 16.0, "pitch": 65, "bearing": 32, "duration": 5000}}, {"id": "277 Park Ave NYC", "eyebrow": "CHAPTER 05 \u00b7 MIDTOWN EAST", "title": "277 Park Ave NYC", "subtitle": "Flagship trophy asset. 211,050 ft\u00b2 of glass \u2014 among the largest opportunities in the NYC pipeline.", "stats": [["GLASS", "211,050 ft\u00b2"], ["VALUE", "$8.4M"], ["STAGE", "3 / 8"]], "tier": "flagship", "camera": {"center": [-73.9742, 40.7568], "zoom": 16.4, "pitch": 65, "bearing": 55, "duration": 5000}}, {"id": "445 Fifth Avenue", "eyebrow": "CHAPTER 06 \u00b7 MIDTOWN", "title": "445 Fifth Avenue", "subtitle": "Mid-size opportunity. 11,872 ft\u00b2 scope. Typical INOVUES deployment.", "stats": [["GLASS", "11,872 ft\u00b2"], ["VALUE", "$481K"], ["STAGE", "4 / 8"]], "tier": "mid", "camera": {"center": [-73.979784, 40.754493], "zoom": 16.0, "pitch": 65, "bearing": 78, "duration": 5000}}, {"id": "605 Third Avenue Mockup", "eyebrow": "CHAPTER 07 \u00b7 MIDTOWN", "title": "605 Third Avenue Mockup", "subtitle": "Early-stage lead. 100 ft\u00b2 scope under qualification.", "stats": [["GLASS", "100 ft\u00b2"], ["VALUE", "$5K"], ["STAGE", "4 / 8"]], "tier": "small", "camera": {"center": [-73.975162, 40.74902], "zoom": 16.2, "pitch": 65, "bearing": 101, "duration": 5000}}, {"id": "outro", "eyebrow": "MANHATTAN PIPELINE", "title": "$11.3M in motion", "subtitle": "7 deals, 316K square feet of Manhattan glass. Every project on the path to compliance and ESG capture.", "stats": [["DEALS", "7"], ["GLASS", "315K ft\u00b2"], ["PIPELINE", "$11.3M"]], "camera": {"center": [-73.978, 40.76], "zoom": 12.5, "pitch": 50, "bearing": 0, "duration": 5500}}];
 
 let flightIdx = 0;
 let flightRunning = false;
