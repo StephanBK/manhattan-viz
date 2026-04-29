@@ -281,31 +281,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -73.98712,
-          40.760372
-        ]
-      },
-      "properties": {
-        "name": "The Biltmore Apartments",
-        "full_name": "The Biltmore Apartments, NYC",
-        "area": "Midtown",
-        "stage": "Passed Technical / Cost-Benefit Evaluation",
-        "stage_idx": 7,
-        "stage_total": 8,
-        "sf": 42114,
-        "amount": 1263432.0,
-        "tier": "major",
-        "is_mockup": false,
-        "created": "6/2/25 22:43",
-        "close": "12/31/26 12:16",
-        "address": "271 West 47th Street, New York, New York 10036, United States"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -73.920257,
           40.836246
         ]
